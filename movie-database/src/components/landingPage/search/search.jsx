@@ -3,18 +3,16 @@ import { ArrowLeft, ChevronUp, SlidersHorizontal } from "lucide-react";
 import ResultCard from "./result";
 import Pagination from "./pagination";
 import SearchBar from "./searchBar";
+import TopBar from "../../items/TopBar";
 
 // --- Main Page ---
 
 function SearchPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans p-8 md:p-12">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white font-sans p-8 md:p-12 transition-colors duration-200">
       {/* Top Nav */}
-      <div className="mb-8">
-        <button className="flex items-center gap-2 text-gray-400 hover:text-white transition text-sm font-medium">
-          <ArrowLeft size={16} />
-          Return to Home
-        </button>
+      <div className="mb-10">
+        <TopBar />
       </div>
 
       {/* Search Section */}
@@ -23,13 +21,15 @@ function SearchPage() {
       {/* Results Header */}
       <div className="flex justify-between items-end mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Search Results</h1>
-          <p className="text-yellow-500 text-sm font-medium">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Search Results
+          </h1>
+          <p className="text-yellow-500 dark:text-yellow-400 text-sm font-medium">
             124 results found for "Interstellar"
           </p>
         </div>
 
-        <button className="flex items-center gap-2 bg-[#161616] border border-white/10 px-4 py-2 rounded text-xs font-bold uppercase tracking-wider hover:bg-[#202020] transition">
+        <button className="flex items-center gap-2 bg-gray-100 dark:bg-[#161616] border border-gray-300 dark:border-white/10 px-4 py-2 rounded text-xs font-bold uppercase tracking-wider hover:bg-gray-200 dark:hover:bg-[#202020] transition-colors text-gray-800 dark:text-white">
           <SlidersHorizontal size={14} />
           Sort By: Popularity
         </button>
@@ -89,7 +89,7 @@ function SearchPage() {
 
       {/* Back to Top */}
       <div className="flex justify-center mt-12">
-        <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-white transition">
+        <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors">
           Back to Top <ChevronUp size={12} />
         </button>
       </div>

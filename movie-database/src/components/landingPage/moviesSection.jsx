@@ -39,7 +39,7 @@ const MoviesSection = () => {
       <CategoryHeader title="Movies" />
 
       <div className="pl-4">
-        <h3 className="text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
+        <h3 className="text-gray-700 dark:text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
           NOW PLAYING
         </h3>
         <ScrollRow>
@@ -48,7 +48,7 @@ const MoviesSection = () => {
           ))}
         </ScrollRow>
 
-        <h3 className="text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
+        <h3 className="text-gray-700 dark:text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
           POPULAR
         </h3>
         <ScrollRow>
@@ -56,7 +56,8 @@ const MoviesSection = () => {
             <PosterCard key={movie.id} item={movie} />
           ))}
         </ScrollRow>
-        <h3 className="text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
+
+        <h3 className="text-gray-700 dark:text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
           TOP RATED
         </h3>
         <ScrollRow>
@@ -64,7 +65,8 @@ const MoviesSection = () => {
             <PosterCard key={movie.id} item={movie} />
           ))}
         </ScrollRow>
-        <h3 className="text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
+
+        <h3 className="text-gray-700 dark:text-gray-300 font-bold mb-4 px-8 md:px-12 text-sm uppercase">
           UPCOMING
         </h3>
         <ScrollRow>
