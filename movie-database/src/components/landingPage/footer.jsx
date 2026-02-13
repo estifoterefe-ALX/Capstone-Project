@@ -16,6 +16,22 @@ const Footer = () => {
         </div>
         <div>
           <h4 className="text-gray-900 dark:text-white font-bold mb-4 uppercase text-sm">
+            Trending
+          </h4>
+          <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
+            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+              Trending Movies
+            </li>
+            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+              Trending Series
+            </li>
+            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+              Trending People
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-gray-900 dark:text-white font-bold mb-4 uppercase text-sm">
             Movies
           </h4>
           <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
@@ -46,22 +62,6 @@ const Footer = () => {
             </li>
             <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
               Top Rated
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-gray-900 dark:text-white font-bold mb-4 uppercase text-sm">
-            Community
-          </h4>
-          <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
-              Discussions
-            </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
-              Leaderboard
-            </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
-              Contests
             </li>
           </ul>
         </div>

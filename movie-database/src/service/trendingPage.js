@@ -8,7 +8,7 @@ export const trending = async () => {
     return response?.data;
   } catch (error) {
     console.error("Error fetching trending content:", error);
-    return null;
+    throw error;
   }
 };
 export const trendingMovies = async () => {
@@ -21,6 +21,32 @@ export const trendingMovies = async () => {
     return response?.data
   } catch (error) {
     console.error(error)
-    return null
+    throw error
+  }
+}
+export const trendingSeries = async () => {
+  try {
+    const response = await landingApi.get("/trending/tv/day",{
+      params:{
+        language:"en-US"
+      }
+    })
+    return response?.data
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+export const trendingPeople = async () => {
+  try {
+    const response = await landingApi.get("/trending/person/day",{
+      params:{
+        language:"en-US"
+      }
+    })
+    return response?.data
+  } catch (error) {
+    console.error(error)
+    throw error
   }
 }

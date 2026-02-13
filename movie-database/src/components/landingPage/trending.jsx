@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Play, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import useLandingPage from "../../hooks/useTrending";
+import { Loader } from "../utils/Loader";
+import { Error } from "../utils/Error";
 
 const Trending = () => {
-  const { slides, loading, error } = useLandingPage();
+  const { slides, isLoading, error } = useLandingPage();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto-rotate slides every 3 seconds
@@ -26,7 +28,12 @@ const Trending = () => {
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev === slides?.length - 1 ? 0 : prev + 1));
   };
-  console.log(slides, "from trending");
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (error) {
+    return <Error />;
+  }
   return (
     <div className="relative h-screen w-full overflow-hidden mb-15">
       {/* Slides */}
@@ -96,7 +103,7 @@ const Trending = () => {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-10 h-1 rounded-full transition-colors ${
+            className={`w-2 h-1 sm:w-4 md:w-6 lg:w-8 rounded-full transition-colors ${
               index === currentSlide
                 ? "bg-yellow-500"
                 : "bg-gray-400/60 hover:bg-gray-600 dark:bg-white/40 dark:hover:bg-white/60"

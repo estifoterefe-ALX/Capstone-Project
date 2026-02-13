@@ -66,7 +66,7 @@ const EPISODES = [
   },
 ];
 
-function Series() {
+function SeriesDetail({ item }) {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0e0e0a] text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       {/* Top Header */}
@@ -204,4 +204,4 @@ function Series() {
     </div>
   );
 }
-export default Series;
+export default SeriesDetail;

@@ -5,7 +5,7 @@ import TrendingSeries from "./trendingSeries";
 import TrendingPeople from "./trendingPeople";
 import MoviesSection from "./moviesSection";
 import SeriesSection from "./seriesSection";
-import Footer from "./Footer";
+import Footer from "./footer";
 import Trending from "./trending";
 
 const App = () => {

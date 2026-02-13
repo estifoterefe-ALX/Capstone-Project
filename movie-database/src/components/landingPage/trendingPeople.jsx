@@ -1,32 +1,41 @@
-import { SectionHeader, ScrollRow, PersonCard } from "./components";
+import {
+  SectionHeader,
+  ScrollRow,
+  PersonCard,
+  PersonCardSkeletonGrid,
+  PersonCardErrorGrid,
+} from "./components";
+import useLandingPage from "../../hooks/useTrending";
 const TrendingPeople = () => {
-  const ACTORS = [
-    {
-      id: 1,
-      name: "Leonardo DiCaprio",
-      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100",
-    },
-    {
-      id: 2,
-      name: "Tom Hanks",
-      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100",
-    },
-    {
-      id: 3,
-      name: "Brad Pitt",
-      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100",
-    },
-    {
-      id: 4,
-      name: "Angelina Jolie",
-      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100",
-    },
-    {
-      id: 5,
-      name: "Robert Downey Jr.",
-      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100",
-    },
-  ];
+  const {
+    trendingPeopleData: ACTORS,
+    trendingPeopleLoading,
+    trendingPeopleError,
+  } = useLandingPage();
+  if (trendingPeopleError) {
+    return (
+      <section>
+        <SectionHeader
+          title="TRENDING PEOPEL"
+          subtitle="CAST & CREW"
+          hasViewAll={false}
+        />
+        <PersonCardErrorGrid />
+      </section>
+    );
+  }
+  if (trendingPeopleLoading) {
+    return (
+      <section>
+        <SectionHeader
+          title="TRENDING PEOPEL"
+          subtitle="CAST & CREW"
+          hasViewAll={false}
+        />
+        <PersonCardSkeletonGrid />
+      </section>
+    );
+  }
   return (
     <>
       <SectionHeader
@@ -35,11 +44,8 @@ const TrendingPeople = () => {
         hasViewAll={false}
       />
       <ScrollRow>
-        {ACTORS.map((actor) => (
+        {ACTORS?.map((actor) => (
           <PersonCard key={actor.id} item={actor} />
-        ))}
-        {ACTORS.map((actor) => (
-          <PersonCard key={`dup-${actor.id}`} item={actor} />
         ))}
       </ScrollRow>
     </>

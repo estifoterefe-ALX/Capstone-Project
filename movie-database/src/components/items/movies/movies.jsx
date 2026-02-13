@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import TopBar from "../TopBar";
 
-const MovieDetails = () => {
+const MovieDetails = ({ item }) => {
   const PRODUCTION_COMPANIES = [
     {
       image: "path/to/logo1.png",
@@ -38,7 +38,7 @@ const MovieDetails = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2560&auto=format&fit=crop"
+            src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
             alt="Hallway Background"
             className="w-full h-full object-cover opacity-60 dark:opacity-60"
           />
@@ -52,7 +52,7 @@ const MovieDetails = () => {
           {/* Poster Card - Hidden on mobile, visible on desktop */}
           <div className="hidden md:block w-64 h-96 shrink-0 rounded-lg overflow-hidden border-4 border-gray-300 dark:border-gray-800/50 shadow-2xl relative transform translate-y-8">
             <img
-              src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?q=80&w=1000&auto=format&fit=crop"
+              src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
               alt="Midnight Echoes Poster"
               className="w-full h-full object-cover"
             />

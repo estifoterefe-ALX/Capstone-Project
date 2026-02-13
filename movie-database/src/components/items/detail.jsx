@@ -10,26 +10,12 @@ import {
 import RecommendationCard from "./recommendations";
 import TopBar from "./TopBar";
 import MetadataItem from "./metaData";
+import { FullDateDisplay, YearDisplay } from "../utils/dateFormater";
+import { Link } from "react-router-dom";
+import MovieDetails from "./movies/movies";
+import SeriesDetail from "./series/series";
 
 // --- Data Placeholders ---
-const MOVIE_DATA = {
-  title: "INTERSTELLAR",
-  year: "2014",
-  rating: "PG-13",
-  runtime: "2H 49M",
-  score: "8.7",
-  tagline: "A Cinematic Masterpiece",
-  synopsis_short:
-    "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
-  synopsis_long:
-    "In a future where Earth's ecosystem is failing, former NASA pilot Cooper leads a mission through a wormhole to find a new home for humanity. As the crew travels across space and time, they face unimaginable challenges and make profound sacrifices to ensure the survival of the human race.",
-  release_date: "Nov 07, 2014",
-  budget: "$165M",
-  genres: ["Sci-Fi", "Adventure", "Drama"],
-  director: "Christopher Nolan",
-  background_img:
-    "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2500&auto=format&fit=crop",
-};
 
 const RECOMMENDATIONS = [
   {
@@ -72,7 +58,22 @@ const CAST_AVATARS = [
 
 // --- Main Page Component ---
 
-export default function Detail() {
+export default function Detail({
+  items,
+  error,
+  loading,
+  recommendation,
+  credits,
+  type,
+}) {
+  const handleViewDetail = () => {
+    if (type === "movie") {
+      <MovieDetails item={items} />;
+    } else {
+      <SeriesDetail item={items} />;
+    }
+  };
+  console.log("rrrrrrrrrr", recommendation, credits);
   return (
     <div className="bg-white dark:bg-[#0b0d14] min-h-screen text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       <TopBar />
@@ -82,7 +83,7 @@ export default function Detail() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src={MOVIE_DATA.background_img}
+            src={`https://image.tmdb.org/t/p/w500/${items?.backdrop_path}`}
             alt="Background"
             className="w-full h-full object-cover"
           />
@@ -98,32 +99,38 @@ export default function Detail() {
               Featured
             </span>
             <span className="text-yellow-500 dark:text-yellow-400 text-xs font-bold tracking-widest uppercase">
-              {MOVIE_DATA.tagline}
+              {items?.tagline}
             </span>
           </div>
 
           <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter text-gray-900 dark:text-white mb-4 uppercase">
-            {MOVIE_DATA.title}
+            {items?.title}
           </h1>
 
-          <div className="flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300 mb-6">
-            <span>{MOVIE_DATA.year}</span>
-            <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full" />
-            <span className="border border-gray-400 dark:border-gray-500 px-1 rounded text-xs">
-              {MOVIE_DATA.rating}
+          <div className="flex items-center gap-6 text-sm font-medium text-gray-900 dark:text-gray-300 mb-6">
+            <span className="text-gray-900 dark:text-gray-300">
+              {items?.release_date
+                ? YearDisplay(items?.release_date)
+                : YearDisplay(items?.first_air_date)}
             </span>
             <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full" />
-            <span>{MOVIE_DATA.runtime}</span>
-            <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full" />
-            <div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400">
+            <span className="border border-gray-400 dark:border-gray-900 px-1 rounded text-xs">
+              {items?.popularity}
+            </span>
+            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
+            <span>
+              {items?.runtime ? items?.runtime : items?.number_of_seasons}
+            </span>
+            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
+            <div className="flex items-center gap-1 text-yellow-900 dark:text-yellow-400">
               <Star size={14} fill="currentColor" />
-              <span>{MOVIE_DATA.score}</span>
+              <span>{items?.vote_average}</span>
             </div>
           </div>
 
-          <p className="text-gray-800 dark:text-gray-400 text-lg leading-relaxed max-w-2xl mb-10 relative pl-4">
+          <p className="text-gray-900 dark:text-gray-400 text-lg leading-relaxed max-w-2xl mb-10 relative pl-4">
             <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-yellow-500/50 dark:bg-yellow-400/50"></span>
-            {MOVIE_DATA.synopsis_short}
+            {items?.overview}
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -133,7 +140,10 @@ export default function Detail() {
             <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
               <Bookmark size={16} /> Add to Watchlist
             </button>
-            <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
+            <button
+              className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer"
+              onClick={handleViewDetail}
+            >
               <Info size={16} /> View Detail
             </button>
           </div>
@@ -151,29 +161,35 @@ export default function Detail() {
 
             {/* Row 1: First 2 MetadataItems */}
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <MetadataItem label="Release" value={MOVIE_DATA.release_date} />
+              <MetadataItem
+                label="Release"
+                value={
+                  items?.release_date
+                    ? FullDateDisplay(items?.release_date)
+                    : FullDateDisplay(items?.first_air_date)
+                }
+              />
               <MetadataItem label="Runtime" value="169 Minutes" />
             </div>
 
             {/* Row 2: Last 2 MetadataItems */}
             <div className="grid grid-cols-2 gap-4 mb-8">
-              <MetadataItem label="Rating" value={MOVIE_DATA.rating} />
               <MetadataItem
-                label="Budget"
-                value={MOVIE_DATA.budget}
-                isHighlight
+                label="Rating"
+                value={items?.vote_average?.toFixed(1)}
               />
+              <MetadataItem label="Budget" value={items?.budget} isHighlight />
             </div>
 
             {/* Row 3: Genres */}
             <div>
               <div className="mt-8 flex flex-wrap gap-2">
-                {MOVIE_DATA.genres.map((genre) => (
+                {items?.genres.map((genre) => (
                   <span
-                    key={genre}
+                    key={genre.id}
                     className="text-[10px] font-bold text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 dark:bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 rounded-full uppercase hover:bg-yellow-500/20 hover:border-yellow-500/50 dark:hover:bg-yellow-500/20 dark:hover:border-yellow-500/50 transition-colors cursor-default"
                   >
-                    {genre}
+                    {genre.name}
                   </span>
                 ))}
               </div>
@@ -187,26 +203,71 @@ export default function Detail() {
             </h3>
 
             <p className="text-gray-600 dark:text-gray-400 leading-loose text-sm md:text-base mb-12">
-              {MOVIE_DATA.synopsis_long}
+              {items?.overview}
             </p>
 
             <div className="flex items-center gap-6">
+              {/* Cast avatar stack */}
               <div className="flex -space-x-4">
-                {CAST_AVATARS.map((src, i) => (
-                  <img
+                {credits?.cast?.slice(0, 5).map((cast, i) => (
+                  <div
                     key={i}
-                    src={src}
-                    className="w-12 h-12 rounded-full border-2 border-white dark:border-[#0b0d14]"
-                    alt="Cast"
-                  />
+                    className="relative group/cast"
+                    onClick={() => {
+                      // Handle cast click - you can customize this
+                      console.log(`View ${cast.name}'s profile`);
+                      // router.push(`/person/${cast.id}`);
+                    }}
+                  >
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500/${cast?.profile_path}`}
+                      className="w-12 h-12 rounded-full border-2 border-white dark:border-[#0b0d14] 
+            group-hover/cast:scale-110 group-hover/cast:z-10 group-hover/cast:border-yellow-500 
+            dark:group-hover/cast:border-yellow-400 transition-all duration-300 
+            group-hover/cast:shadow-xl cursor-pointer"
+                      alt={cast.name}
+                    />
+
+                    {/* Tooltip on hover */}
+                    <div
+                      className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 
+          bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-medium 
+          rounded-md opacity-0 group-hover/cast:opacity-100 transition-opacity duration-200 
+          whitespace-nowrap pointer-events-none shadow-lg z-20"
+                    >
+                      {cast.name}
+                      <div
+                        className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 
+            border-4 border-transparent border-t-gray-900 dark:border-t-white"
+                      />
+                    </div>
+                  </div>
                 ))}
+
+                {/* Show remaining count if more than 5 cast members */}
+                {credits?.cast?.length > 5 && (
+                  <div
+                    className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 
+        border-2 border-white dark:border-[#0b0d14] flex items-center justify-center
+        text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-200 
+        dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                  >
+                    +{credits.cast.length - 5}
+                  </div>
+                )}
               </div>
+
+              {/* Director info */}
               <div>
                 <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold mb-1">
                   Directed By
                 </p>
                 <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">
-                  {MOVIE_DATA.director}
+                  {credits?.crew?.find((person) => person.job === "Director")
+                    ?.name ||
+                    credits?.crew?.find(
+                      (person) => person.known_for_department === "Writing",
+                    )?.name}
                 </p>
               </div>
             </div>
@@ -235,8 +296,10 @@ export default function Detail() {
           </div>
         </div>
         <div className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide">
-          {RECOMMENDATIONS.map((movie) => (
-            <RecommendationCard key={movie.id} item={movie} />
+          {recommendation?.list?.results?.map((movie) => (
+            <Link key={movie.id} to={`/detailCaller/${movie.id}?type=${type}`}>
+              <RecommendationCard key={movie.id} item={movie} />
+            </Link>
           ))}
         </div>
       </div>
