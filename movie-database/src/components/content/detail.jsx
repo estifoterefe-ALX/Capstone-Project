@@ -167,21 +167,14 @@ export default function Detail({
               {/* Cast avatar stack */}
               <div className="flex -space-x-4">
                 {credits?.cast?.slice(0, 5).map((cast, i) => (
-                  <div
-                    key={i}
-                    className="relative group/cast"
-                    onClick={() => {
-                      // Handle cast click - you can customize this
-                      console.log(`View ${cast.name}'s profile`);
-                      // router.push(`/person/${cast.id}`);
-                    }}
-                  >
+                  <div key={i} className="relative group/cast">
                     <img
                       src={`https://image.tmdb.org/t/p/w500/${cast?.profile_path}`}
                       className="w-12 h-12 rounded-full border-2 border-white dark:border-[#0b0d14] 
-            group-hover/cast:scale-110 group-hover/cast:z-10 group-hover/cast:border-yellow-500 
-            dark:group-hover/cast:border-yellow-400 transition-all duration-300 
-            group-hover/cast:shadow-xl cursor-pointer"
+    group-hover/cast:scale-120 group-hover/cast:z-20 group-hover/cast:border-yellow-500 
+    dark:group-hover/cast:border-yellow-400 transition-all duration-300 
+    group-hover/cast:shadow-xl cursor-pointer
+    group-hover/cast:relative"
                       alt={cast.name}
                     />
 
