@@ -3,7 +3,7 @@ import { ArrowLeft, ChevronUp, SlidersHorizontal } from "lucide-react";
 import ResultCard from "./result";
 import Pagination from "./pagination";
 import SearchBar from "./searchBar";
-import TopBar from "../../items/TopBar";
+import TopBar from "../../content/TopBar";
 
 // --- Main Page ---
 

@@ -1,10 +1,10 @@
 import {
+  PersonCard,
   SectionHeader,
   ScrollRow,
-  PersonCard,
-  PersonCardSkeletonGrid,
-  PersonCardErrorGrid,
-} from "./components";
+} from "../utils/helperComponents";
+import { PersonCardSkeletonGrid } from "../utils/loadingComponents";
+import { PersonCardErrorGrid } from "../utils/errorComponents";
 import useLandingPage from "../../hooks/useTrending";
 const TrendingPeople = () => {
   const {

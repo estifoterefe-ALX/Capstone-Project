@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/landingPage/landingPage";
-import Movies from "./components/items/movies/movies";
-import Series from "./components/items/series/series";
-import DetailCaller from "./components/items/detailCaller";
+import Movies from "./components/content/movies/movies";
+import Series from "./components/content/series/series";
+import DetailCaller from "./components/content/detailCaller";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchPage from "./components/landingPage/search/search";
 function App() {

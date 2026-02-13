@@ -1,5 +1,5 @@
 import { ChevronLeft, Share2 } from "lucide-react";
-import ThemeToggle from "../landingPage/themeToggle";
+import ThemeToggle from "../utils/themeToggle";
 import { useNavigate } from "react-router-dom";
 const TopBar = () => {
   const navigate = useNavigate();

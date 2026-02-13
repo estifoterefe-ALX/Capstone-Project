@@ -7,56 +7,13 @@ import {
   Star,
   ChevronRight,
 } from "lucide-react";
-import RecommendationCard from "./recommendations";
+import { RecommendationCard, NoRecommendations } from "./recommendations";
 import TopBar from "./TopBar";
 import MetadataItem from "./metaData";
 import { FullDateDisplay, YearDisplay } from "../utils/dateFormater";
 import { Link } from "react-router-dom";
 import MovieDetails from "./movies/movies";
 import SeriesDetail from "./series/series";
-
-// --- Data Placeholders ---
-
-const RECOMMENDATIONS = [
-  {
-    id: 1,
-    title: "Inception",
-    year: "2010",
-    director: "Christopher Nolan",
-    img: "https://imasfsdges.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&q=80&w=300&h=450",
-  },
-  {
-    id: 2,
-    title: "The Martian",
-    year: "2015",
-    director: "Ridley Scott",
-    img: "https://imagegsdfsdfs.unsplash.com/photo-1614726365723-49cfae9278b7?auto=format&fit=crop&q=80&w=300&h=450",
-  },
-  {
-    id: 3,
-    title: "Gravity",
-    year: "2013",
-    director: "Alfonso Cuarón",
-    img: "https://images.unssdfsadplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=300&h=450",
-  },
-  {
-    id: 4,
-    title: "Arrival",
-    year: "2016",
-    director: "Denis Villeneuve",
-    img: "https://images.unssdafplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=300&h=450",
-  },
-];
-
-const CAST_AVATARS = [
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100",
-];
-
-// --- Components ---
-
-// --- Main Page Component ---
 
 export default function Detail({
   items,
@@ -296,11 +253,18 @@ export default function Detail({
           </div>
         </div>
         <div className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide">
-          {recommendation?.list?.results?.map((movie) => (
-            <Link key={movie.id} to={`/detailCaller/${movie.id}?type=${type}`}>
-              <RecommendationCard key={movie.id} item={movie} />
-            </Link>
-          ))}
+          {!recommendation?.list?.results ? (
+            recommendation?.list?.results?.map((movie) => (
+              <Link
+                key={movie.id}
+                to={`/detailCaller/${movie.id}?type=${type}`}
+              >
+                <RecommendationCard key={movie.id} item={movie} />
+              </Link>
+            ))
+          ) : (
+            <NoRecommendations />
+          )}
         </div>
       </div>
 

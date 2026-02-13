@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  SectionHeader,
-  ScrollRow,
-  PosterCard,
-  PosterCardSkeletonGrid,
-  PosterCardErrorGrid,
-} from "./components";
+import { PosterCard,SectionHeader,ScrollRow } from "../utils/helperComponents";
+import { PosterCardSkeletonGrid } from "../utils/loadingComponents";
+import { PosterCardErrorGrid } from "../utils/errorComponents";
 import useLandingPage from "../../hooks/useTrending";
 import { Link } from "react-router-dom";
 const TrendingMovies = () => {

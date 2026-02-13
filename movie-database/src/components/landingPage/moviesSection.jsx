@@ -1,14 +1,18 @@
 import {
   CategoryHeader,
   LandscapeCard,
-  NormalHeader,
   PosterCard,
-  LandscapeCardSkeletonGrid,
-  LandscapeCardErrorGrid,
-  PosterCardSkeletonGrid,
-  PosterCardErrorGrid,
+  NormalHeader,
   MediaRow,
-} from "./components";
+} from "../utils/helperComponents";
+import {
+  LandscapeCardSkeletonGrid,
+  PosterCardSkeletonGrid,
+} from "../utils/loadingComponents";
+import {
+  LandscapeCardErrorGrid,
+  PosterCardErrorGrid,
+} from "../utils/errorComponents";
 import useMovies from "../../hooks/useMovies";
 const MoviesSection = () => {
   const {

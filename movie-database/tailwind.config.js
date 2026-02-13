@@ -19,5 +19,5 @@ export default {
         },
       },
     },
-    plugins: [],
+    plugins: [import('@tailwindcss/forms').then(mod => mod.default ? mod.default : mod)]
   }
