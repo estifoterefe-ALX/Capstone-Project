@@ -12,8 +12,6 @@ import TopBar from "./TopBar";
 import MetadataItem from "./metaData";
 import { FullDateDisplay, YearDisplay } from "../utils/dateFormater";
 import { Link } from "react-router-dom";
-import MovieDetails from "./movies/movies";
-import SeriesDetail from "./series/series";
 
 export default function Detail({
   items,
@@ -22,14 +20,8 @@ export default function Detail({
   recommendation,
   credits,
   type,
+  id,
 }) {
-  const handleViewDetail = () => {
-    if (type === "movie") {
-      <MovieDetails item={items} />;
-    } else {
-      <SeriesDetail item={items} />;
-    }
-  };
   console.log("rrrrrrrrrr", recommendation, credits);
   return (
     <div className="bg-white dark:bg-[#0b0d14] min-h-screen text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
@@ -97,12 +89,11 @@ export default function Detail({
             <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
               <Bookmark size={16} /> Add to Watchlist
             </button>
-            <button
-              className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer"
-              onClick={handleViewDetail}
-            >
-              <Info size={16} /> View Detail
-            </button>
+            <Link to={type === "movie" ? `/movies/${id}` : `/series/${id}`}>
+              <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
+                <Info size={16} /> View Detail
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -135,7 +126,11 @@ export default function Detail({
                 label="Rating"
                 value={items?.vote_average?.toFixed(1)}
               />
-              <MetadataItem label="Budget" value={items?.budget} isHighlight />
+              <MetadataItem
+                label="Budget"
+                value={items?.budget ? items?.budget : "No Budget Info"}
+                isHighlight
+              />
             </div>
 
             {/* Row 3: Genres */}

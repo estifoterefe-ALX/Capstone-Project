@@ -15,8 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/detailCaller/:id" element={<DetailCaller />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/series" element={<Series />} />
+            <Route path="/movies/:id" element={<Movies />} />
+            <Route path="/series/:id" element={<Series />} />
             <Route path="/search" element={<SearchPage />} />
           </Routes>
         </BrowserRouter>

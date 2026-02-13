@@ -63,6 +63,7 @@ function DetailCaller() {
       recommendation={sentData.recommendation}
       credits={sentData.credits}
       type={sentData.type}
+      id={id.id}
     />
   );
 }

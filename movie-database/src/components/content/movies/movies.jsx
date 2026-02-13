@@ -1,15 +1,16 @@
 import React from "react";
-import {
-  ArrowLeft,
-  Play,
-  Plus,
-  Star,
-  Building2,
-  Clapperboard,
-} from "lucide-react";
+import { Play, Plus, Star } from "lucide-react";
 import TopBar from "../TopBar";
+import { useParams } from "react-router-dom";
+import useMovies from "../../../hooks/useMovies";
+import {
+  FullDateDisplay,
+  FormatNumberWithComma,
+  FormatMinutesToTime,
+  RoundToOneDecimal,
+} from "../../utils/dateFormater";
 
-const MovieDetails = ({ item }) => {
+const MovieDetails = () => {
   const PRODUCTION_COMPANIES = [
     {
       image: "path/to/logo1.png",
@@ -28,6 +29,12 @@ const MovieDetails = ({ item }) => {
       title: "UNIVERSAL",
     },
   ];
+  const id = useParams();
+  const { movieDetailData, movieDetailLoading, movieDetailError } = useMovies(
+    id.id,
+    "movie",
+  );
+  console.log("MOVOVOVOV", movieDetailData, id);
   return (
     <div className="min-h-screen bg-white dark:bg-[#0c0c0c] text-gray-900 dark:text-white font-sans p-6 md:p-10 transition-colors duration-200">
       {/* Navigation */}
@@ -38,13 +45,14 @@ const MovieDetails = ({ item }) => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
-            alt="Hallway Background"
+            src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.backdrop_path}`}
+            alt={movieDetailData?.name}
             className="w-full h-full object-cover opacity-60 dark:opacity-60"
+            loading="lazy"
           />
           {/* Gradient Overlay for Fade Effect */}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-100/30 via-transparent to-transparent dark:from-[#0c0c0c] dark:via-[#0c0c0c]/40 dark:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-100/20 via-transparent to-transparent dark:from-[#0c0c0c]/90 dark:via-[#0c0c0c]/30 dark:to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-gray-100/30 via-transparent to-transparent dark:from-[#0c0c0c] dark:via-[#0c0c0c]/40 dark:to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-gray-100/20 via-transparent to-transparent dark:from-[#0c0c0c]/90 dark:via-[#0c0c0c]/30 dark:to-transparent" />
         </div>
 
         {/* Hero Content Layer */}
@@ -52,14 +60,15 @@ const MovieDetails = ({ item }) => {
           {/* Poster Card - Hidden on mobile, visible on desktop */}
           <div className="hidden md:block w-64 h-96 shrink-0 rounded-lg overflow-hidden border-4 border-gray-300 dark:border-gray-800/50 shadow-2xl relative transform translate-y-8">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
-              alt="Midnight Echoes Poster"
+              src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.poster_path}`}
+              alt={movieDetailData?.name}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             {/* Poster Overlay Text imitating the design */}
             <div className="absolute bottom-0 w-full p-4 text-center bg-linear-to-t from-black/90 to-transparent">
               <h3 className="text-yellow-500 font-serif text-xl tracking-widest">
-                THE GILDED AGE
+                {movieDetailData?.tagline}
               </h3>
             </div>
           </div>
@@ -72,12 +81,12 @@ const MovieDetails = ({ item }) => {
               </span>
               <div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 text-sm font-bold">
                 <Star size={14} fill="currentColor" />
-                <span>8.4 Rating</span>
+                <span>{movieDetailData?.vote_average} Rating</span>
               </div>
             </div>
 
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8 tracking-tight">
-              Midnight Echoes
+              {movieDetailData?.title}
             </h1>
 
             <div className="flex gap-4">
@@ -96,27 +105,54 @@ const MovieDetails = ({ item }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 px-2 md:px-4">
         {/* Left Column: Metadata */}
         <div className="lg:col-span-3 space-y-8">
-          <InfoItem label="Release Date" value="November 14, 2023" />
-          <InfoItem label="Runtime" value="2h 14m" />
+          <InfoItem
+            label="Release Date"
+            value={FullDateDisplay(movieDetailData?.release_date)}
+          />
+          <InfoItem
+            label="Budget"
+            value={
+              movieDetailData?.budget
+                ? "$" + FormatNumberWithComma(movieDetailData?.budget)
+                : "No Budget Info"
+            }
+          />
+          <InfoItem
+            label="Runtime"
+            value={
+              movieDetailData?.budget
+                ? FormatMinutesToTime(movieDetailData?.runtime)
+                : "No Run Time Info"
+            }
+          />
           <InfoItem
             label="Rating"
             value={
               <span>
-                8.4 / 10{" "}
+                {RoundToOneDecimal(movieDetailData?.vote_average)} / 10{" "}
                 <span className="text-gray-500 dark:text-gray-400 text-xs font-normal ml-1">
-                  (2,451 votes)
+                  {movieDetailData?.vote_count + " votes"}
                 </span>
               </span>
             }
           />
-          <InfoItem label="Language" value="English (Dolby Atmos)" />
+          <InfoItem
+            label="Country"
+            value={movieDetailData?.origin_country.map((country) => country)}
+          />
+          <InfoItem
+            label="Language"
+            value={movieDetailData?.spoken_languages.map(
+              (lang) => lang.english_name,
+            )}
+          />
 
           <div>
             <h4 className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase tracking-widest mb-2">
               Box Office Revenue
             </h4>
             <p className="text-yellow-500 dark:text-yellow-400 font-bold text-xl">
-              $428,500,000
+              {"$" + FormatNumberWithComma(movieDetailData?.revenue)}
             </p>
           </div>
         </div>
@@ -125,12 +161,12 @@ const MovieDetails = ({ item }) => {
         <div className="lg:col-span-9">
           {/* Genre Tags */}
           <div className="flex flex-wrap gap-3 mb-8">
-            {["Thriller", "Mystery", "Crime", "Drama"].map((genre) => (
+            {movieDetailData?.genres?.map((genre) => (
               <span
-                key={genre}
+                key={genre.id}
                 className="bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/5 px-4 py-1.5 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:border-yellow-500/50 transition cursor-default"
               >
-                {genre}
+                {genre.name}
               </span>
             ))}
           </div>
@@ -143,13 +179,7 @@ const MovieDetails = ({ item }) => {
           </div>
 
           <div className="text-gray-600 dark:text-gray-400 leading-relaxed space-y-6 max-w-4xl text-sm md:text-base">
-            <p>
-              In a world where every sound can be tracked, a disgraced former
-              intelligence officer must navigate the shadows of a neo-noir
-              metropolis to uncover a conspiracy that threatens to erase history
-              itself. "Midnight Echoes" blends high-stakes corporate espionage
-              with a deeply personal journey of redemption.
-            </p>
+            <p>{movieDetailData?.overview}</p>
             <p>
               As the silence deepens, the secrets speak louder. Every alleyway
               hides a predator, and every face is a mask. In this game of
@@ -164,35 +194,36 @@ const MovieDetails = ({ item }) => {
               Production Companies
             </h4>
             <div className="flex overflow-x-auto gap-6 pb-6 no-scrollbar">
-              {PRODUCTION_COMPANIES.map((company, index) => (
+              {movieDetailData?.production_companies.map((company) => (
                 <div
-                  key={index}
-                  className="flex-none w-80 h-48 relative rounded-xl overflow-hidden group cursor-pointer border border-gray-300 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-500"
+                  key={company.id}
+                  className="flex-none w-80 h-48 relative rounded-xl overflow-hidden group cursor-pointer border border-gray-300 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-500 bg-gray-300 hover:scale-105"
                 >
-                  {/* Background Image with carousel effect */}
+                  {/* Image - clearly visible */}
                   <img
-                    src={company.image}
-                    alt={company.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    src={`https://image.tmdb.org/t/p/w500/${company?.logo_path}`}
+                    alt={company.name}
+                    className="w-full h-full object-contain p-6"
+                    onError={(e) => {
+                      e.target.src =
+                        "https://via.placeholder.com/500x281?text=No+Logo";
+                    }}
                   />
 
-                  {/* Gradient Overlay (like hero section) */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
-                  <div className="absolute inset-0 bg-linear-to-r from-black/70 via-transparent to-transparent"></div>
+                  {/* Light overlay for both modes - no dark gradients */}
+                  <div className="absolute inset-0 bg-white/80 dark:bg-[#0a0f1c]/90 backdrop-blur-[2px] opacity-0 transition-opacity duration-300" />
 
-                  {/* Content positioned like hero */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="inline-block bg-yellow-500/20 backdrop-blur-sm border border-yellow-500/30 px-3 py-1 rounded mb-3">
-                      <span className="text-yellow-500 dark:text-yellow-400 text-xs font-black uppercase tracking-widest">
+                  {/* Content - always visible, no dark background behind it */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="inline-block bg-yellow-500/10 backdrop-blur-sm px-3 py-1 rounded mb-2">
+                      <span className="text-yellow-800 text-xs font-black uppercase tracking-widest">
                         PRODUCTION
                       </span>
                     </div>
-                    <h3 className="text-gray-900 dark:text-white text-2xl font-black uppercase tracking-tight mb-2">
-                      {company.title}
+                    <h3 className="text-gray-900 text-lg font-black uppercase tracking-tight">
+                      {company.name}
                     </h3>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">
-                      Studio Partner
-                    </p>
+                    <p className="text-gray-700 text-sm">Studio Partner</p>
                   </div>
                 </div>
               ))}

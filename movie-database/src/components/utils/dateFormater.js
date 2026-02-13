@@ -34,3 +34,31 @@ export function FullDateDisplay(date) {
   // Remove the comma that toLocaleDateString usually adds
   return formatted.replace(",", "");
 }
+export function FormatNumberWithComma(value) {
+  if (value === null || value === undefined) return "";
+  
+  const number = Number(value);
+  if (isNaN(number)) return "";
+
+  return number.toLocaleString("en-US");
+}
+export function FormatMinutesToTime(minutes) {
+  if (minutes === null || minutes === undefined) return "";
+
+  const totalMinutes = Number(minutes);
+  if (isNaN(totalMinutes) || totalMinutes < 0) return "";
+
+  const hours = Math.floor(totalMinutes / 60);
+  const mins = totalMinutes % 60;
+
+  return `${hours}:${mins.toString().padStart(2, "0")}`;
+}
+export function RoundToOneDecimal(value) {
+  if (value === null || value === undefined) return "";
+
+  const number = Number(value);
+  if (isNaN(number)) return "";
+
+  return Math.floor(number * 10) / 10;
+}
+

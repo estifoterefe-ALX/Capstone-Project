@@ -67,7 +67,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-t border-gray-300 dark:border-gray-800 pt-8 flex justify-between items-center text-xs text-gray-500 dark:text-gray-600">
-        <p>&copy; 2024 MovieDB. All rights reserved.</p>
+        <p>&copy; 2026 MovieDB. All rights reserved.</p>
         <div className="flex gap-4">
           <span className="hover:text-gray-900 dark:hover:text-gray-400 cursor-pointer transition-colors">
             Privacy Policy
