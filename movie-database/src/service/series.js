@@ -91,3 +91,31 @@ export const seriesPeople = async (id) => {
         throw error
     }
 }
+export const seriesSeason =async (id,sennum) => {
+    try {
+        const response = await landingApi.get(`/tv/${id}/season/${sennum}`,{
+            params:{
+                language:"en-US"
+            }
+        })
+        return response?.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+    
+}
+export const seriesSeasonEpsoide =async (id,sennum,epnum) => {
+    try {
+        const response = await landingApi.get(`/tv/${id}/season/${sennum}/epsoide/${epnum}`,{
+            params:{
+                language:"en-US"
+            }
+        })
+        return response?.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+    
+}

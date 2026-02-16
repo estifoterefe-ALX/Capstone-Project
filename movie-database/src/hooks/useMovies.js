@@ -22,7 +22,7 @@ const useMovies = (id, type) => {
         queryFn: popularMovies,
         staleTime: 60 * 1000,
     })
-    const { data: movieDetailData, isLoading: movieDetailLoading, error: movieDetailError } = useQuery({
+    const { data: movieDetailData, isLoading: movieDetailLoading, error: movieDetailError, refetch: movieDetailRefresh } = useQuery({
         queryKey: ["movieDetail", id],
         queryFn: () => movieDetail(id),
         enabled: type === "movie",
@@ -40,7 +40,6 @@ const useMovies = (id, type) => {
         enabled: type === "movie",
         staleTime: 5 * 60 * 1000,
     })
-    console.log("detal", movieDetailData)
     return ({
         upcomingMoviesData: upcomingMoviesData?.results,
         upcomingMoviesError,
@@ -57,6 +56,7 @@ const useMovies = (id, type) => {
         movieDetailData,
         movieDetailLoading,
         movieDetailError,
+        movieDetailRefresh,
         movieRecommendationData,
         movieRecommendationError,
         movieRecommendationLoading,

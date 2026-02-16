@@ -54,7 +54,6 @@ function DetailCaller() {
         credits: seriesPeopleData,
         type: type,
       };
-  console.log("detail2323232323", sentData);
   return (
     <Detail
       items={sentData.data}

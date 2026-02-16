@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { nowPlayingSeries, popularSeries, topRatedSeries, upComingSeries, seriesDetail, seriesRecommendations,seriesPeople } from "../service/series";
+import { nowPlayingSeries, popularSeries, topRatedSeries, upComingSeries, seriesDetail, seriesRecommendations,seriesPeople,seriesSeason,seriesSeasonEpsoide } from "../service/series";
 
-const useSeries = (id, type) => {
+const useSeries = (id, type,senid ) => {
     const { data: upcomingSeriesData, isLoading: upcomingSeriesLoading, error: upcomingSeriesError } = useQuery({
         queryKey: ["upcomingSeries"],
         queryFn: upComingSeries,
@@ -40,7 +40,12 @@ const useSeries = (id, type) => {
         enabled: type === "series",
         staleTime: 5 * 60 * 1000,
     })
-    console.log(seriesDetailData,"seriessssss")
+    const { data: seriesSeasonData, isLoading: seriesSeasonLoading, error: seriesSeasonError } = useQuery({
+        queryKey: ["seriesSeason", id,senid],
+        queryFn: () => seriesSeason(id,senid),
+        enabled: type === "series",
+        staleTime: 5 * 60 * 1000,
+    })
     return ({
         upcomingSeriesData: upcomingSeriesData?.results,
         upcomingSeriesError,
@@ -62,7 +67,10 @@ const useSeries = (id, type) => {
         seriesRecommendationLoading,
         seriesPeopleData,
         seriesPeopleError,
-        seriesPeopleLoading
+        seriesPeopleLoading,
+        seriesSeasonData,
+        seriesSeasonError,
+        seriesSeasonLoading
 
     })
 }

@@ -26,7 +26,6 @@ const TrendingMovies = () => {
       </section>
     );
   }
-  console.log("trending", TRENDING_MOVIES);
   return (
     <section>
       <SectionHeader title="TRENDING SECTION" subtitle="POPULAR SECTION" />

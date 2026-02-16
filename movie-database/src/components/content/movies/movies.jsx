@@ -9,32 +9,25 @@ import {
   FormatMinutesToTime,
   RoundToOneDecimal,
 } from "../../utils/dateFormater";
-
+import { FullScreenLoader } from "../../utils/Loader";
+import { FullScreenError } from "../../utils/Error";
 const MovieDetails = () => {
-  const PRODUCTION_COMPANIES = [
-    {
-      image: "path/to/logo1.png",
-      title: "WARNER BROS",
-    },
-    {
-      image: "path/to/logo2.png",
-      title: "LEGENDARY",
-    },
-    {
-      image: null, // or empty string
-      title: "VILLENEUVE FILMS",
-    },
-    {
-      image: "path/to/logo4.png",
-      title: "UNIVERSAL",
-    },
-  ];
   const id = useParams();
-  const { movieDetailData, movieDetailLoading, movieDetailError } = useMovies(
-    id.id,
-    "movie",
-  );
-  console.log("MOVOVOVOV", movieDetailData, id);
+  const {
+    movieDetailData,
+    movieDetailLoading,
+    movieDetailError,
+    movieDetailRefresh,
+  } = useMovies(id.id, "movie");
+  if (movieDetailLoading) {
+    <FullScreenLoader />;
+  }
+  if (movieDetailError) {
+    <FullScreenError
+      message={"Failed to load movie information."}
+      onRetry={movieDetailRefresh}
+    />;
+  }
   return (
     <div className="min-h-screen bg-white dark:bg-[#0c0c0c] text-gray-900 dark:text-white font-sans p-6 md:p-10 transition-colors duration-200">
       {/* Navigation */}
