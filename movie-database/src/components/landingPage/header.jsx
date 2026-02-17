@@ -22,7 +22,7 @@ const items = [
   },
 ];
 
-const Header = ({ isLoggedIn = true }) => {
+const Header = ({ isLoggedIn = false }) => {
   const [activeTab, setActiveTab] = useState("home");
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const navigate = useNavigate();

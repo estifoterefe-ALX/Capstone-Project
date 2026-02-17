@@ -69,6 +69,7 @@ const MoviesSection = () => {
             SkeletonComponent={PosterCardSkeletonGrid}
             ErrorComponent={PosterCardErrorGrid}
             type={"movie"}
+            hasRating={true}
           />
         </section>
         <section id="upcoming">

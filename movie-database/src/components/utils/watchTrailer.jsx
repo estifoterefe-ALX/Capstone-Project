@@ -13,7 +13,7 @@ function WatchTrailerButton({ id, type }) {
     }
 
     const url = `https://www.youtube.com/watch?v=${encodedQuery}`;
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener, noreferrer");
   };
   return (
     <button

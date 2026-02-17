@@ -8,7 +8,6 @@ import WatchTrailerButton from "../utils/watchTrailer";
 const Trending = () => {
   const { slides, isLoading, error } = useLandingPage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  console.log(slides);
   // Auto-rotate slides every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
