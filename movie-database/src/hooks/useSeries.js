@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { nowPlayingSeries, popularSeries, topRatedSeries, upComingSeries, seriesDetail, seriesRecommendations,seriesPeople,seriesSeason,seriesSeasonEpsoide } from "../service/series";
+import { nowPlayingSeries, popularSeries, topRatedSeries, upComingSeries, seriesDetail, seriesRecommendations,seriesPeople,seriesSeason,seriesVideo } from "../service/series";
 
 const useSeries = (id, type,senid ) => {
     const { data: upcomingSeriesData, isLoading: upcomingSeriesLoading, error: upcomingSeriesError } = useQuery({
@@ -28,6 +28,12 @@ const useSeries = (id, type,senid ) => {
         enabled: type === "series",
         staleTime: 10 * 60 * 1000,
     })
+    const { data: seriesVideoData, isLoading: seriesVideoLoading, error: seriesVideoError } = useQuery({
+        queryKey: ["seriesVideo", id],
+        queryFn: () => seriesVideo(id),
+        enabled: type === "series",
+        staleTime: 10 * 60 * 1000,
+    })
     const { data: seriesRecommendationData, isLoading: seriesRecommendationLoading, error: seriesRecommendationError } = useQuery({
         queryKey: ["seriesRecommendation", id],
         queryFn: () => seriesRecommendations(id),
@@ -43,7 +49,7 @@ const useSeries = (id, type,senid ) => {
     const { data: seriesSeasonData, isLoading: seriesSeasonLoading, error: seriesSeasonError } = useQuery({
         queryKey: ["seriesSeason", id,senid],
         queryFn: () => seriesSeason(id,senid),
-        enabled: type === "series",
+        enabled: !!senid,
         staleTime: 5 * 60 * 1000,
     })
     return ({
@@ -70,7 +76,8 @@ const useSeries = (id, type,senid ) => {
         seriesPeopleLoading,
         seriesSeasonData,
         seriesSeasonError,
-        seriesSeasonLoading
+        seriesSeasonLoading,
+        seriesVideoData:seriesVideoData?.results?.find((item)=>item.site==="YouTube" && item.type==="Trailer")
 
     })
 }

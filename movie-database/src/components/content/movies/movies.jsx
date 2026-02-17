@@ -11,6 +11,7 @@ import {
 } from "../../utils/dateFormater";
 import { FullScreenLoader } from "../../utils/Loader";
 import { FullScreenError } from "../../utils/Error";
+import WatchTrailerButton from "../../utils/watchTrailer";
 const MovieDetails = () => {
   const id = useParams();
   const {
@@ -83,9 +84,7 @@ const MovieDetails = () => {
             </h1>
 
             <div className="flex gap-4">
-              <button className="bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-400 dark:hover:bg-yellow-300 text-black px-8 py-3 rounded-xl font-bold flex items-center gap-2 transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/20 dark:shadow-yellow-400/20">
-                <Play size={20} fill="currentColor" /> Watch Movie
-              </button>
+              <WatchTrailerButton id={movieDetailData?.id} type={"movie"} />
               <button className="bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-md text-gray-800 dark:text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2 transition-all border border-gray-300 dark:border-white/10">
                 <Plus size={20} /> My List
               </button>

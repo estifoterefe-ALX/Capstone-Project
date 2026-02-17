@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { upComingMovies, topRatedMovies, nowPlayingMovies, popularMovies, movieDetail, movieRecommendations, moviePeople } from "../service/movies";
+import { upComingMovies, topRatedMovies, nowPlayingMovies, popularMovies, movieDetail, movieRecommendations, moviePeople ,movieVideo} from "../service/movies";
 
 const useMovies = (id, type) => {
     const { data: upcomingMoviesData, isLoading: upcomingMoviesLoading, error: upcomingMoviesError } = useQuery({
@@ -40,6 +40,12 @@ const useMovies = (id, type) => {
         enabled: type === "movie",
         staleTime: 5 * 60 * 1000,
     })
+    const { data: movieVideoData, isLoading: movieVideoLoading, error: movieVideoError } = useQuery({
+        queryKey: ["movieVideo", id],
+        queryFn: () => movieVideo(id),
+        enabled: type === "movie",
+        staleTime: 5 * 60 * 1000,
+    })
     return ({
         upcomingMoviesData: upcomingMoviesData?.results,
         upcomingMoviesError,
@@ -62,7 +68,8 @@ const useMovies = (id, type) => {
         movieRecommendationLoading,
         moviePeopleData,
         moviePeopleError,
-        moviePeopleLoading
+        moviePeopleLoading,
+        movieVideoData:movieVideoData?.results?.find((item)=>item.site==="YouTube" && item.type==="Trailer")
 
     })
 }

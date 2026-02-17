@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  ArrowLeft,
-  ChevronDown,
-  Star,
-  Languages,
-  Clock,
-  Film,
-  ShieldCheck,
-} from "lucide-react";
+import { ChevronDown, Star, Languages, Plus } from "lucide-react";
 import { EpisodeCard, MetadataBlock, EpisodeDisplay } from "./epsoides";
 import TopBar from "../TopBar";
 import { useParams } from "react-router-dom";
 import useSeries from "../../../hooks/useSeries";
 import { useState, useEffect } from "react";
 import { RoundToOneDecimal, FullDateDisplay } from "../../utils/dateFormater";
+import WatchTrailerButton from "../../utils/watchTrailer";
 
 function SeriesDetail() {
   const { id } = useParams();
@@ -36,9 +29,16 @@ function SeriesDetail() {
         <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tighter uppercase mb-2">
           {seriesDetailData?.name}
         </h1>
-        <p className="text-yellow-500 dark:text-yellow-400 text-lg italic font-medium">
-          {`${season?.name}`}
-        </p>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-4">
+          {/* Watch Trailer Button */}
+          <WatchTrailerButton id={seriesDetailData?.id} type={"series"} />
+
+          {/* Add to List Button */}
+          <button className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-[#252525] hover:bg-gray-300 dark:hover:bg-[#333333] text-gray-900 dark:text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 border border-gray-300 dark:border-white/10">
+            <Plus size={20} /> My List
+          </button>
+        </div>
       </div>
 
       {/* Main Content Layout */}

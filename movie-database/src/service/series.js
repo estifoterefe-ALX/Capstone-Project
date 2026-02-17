@@ -119,3 +119,17 @@ export const seriesSeasonEpsoide =async (id,sennum,epnum) => {
     }
     
 }
+export const seriesVideo =async (id) => {
+    try {
+        const response = await landingApi.get(`/tv/${id}/videos`,{
+            params:{
+                language:"en-US"
+            }
+        })
+        return response?.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+    
+}

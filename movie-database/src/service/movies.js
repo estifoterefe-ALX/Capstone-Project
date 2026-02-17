@@ -91,3 +91,16 @@ export const moviePeople = async (id) => {
         throw error
     }
 }
+export const movieVideo = async (id) => {
+    try {
+        const response = await landingApi.get(`/movie/${id}/videos`,{
+            params:{
+                language:"en-US"
+            }
+        })
+        return response?.data
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
