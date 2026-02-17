@@ -24,7 +24,9 @@ export default function ThemeToggle() {
     border-2 dark:border-yellow-300/80 border-purple-400/80
     hover:scale-[1.02] active:scale-[0.98]
     overflow-hidden
-    group"
+    group
+    cursor-pointer
+    "
     >
       {/* Dynamic background glow */}
       <div className="absolute inset-0 rounded-full overflow-hidden">
