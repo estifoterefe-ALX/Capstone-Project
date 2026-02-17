@@ -31,7 +31,7 @@ const TrendingSeries = () => {
     );
   }
   return (
-    <>
+    <section id="trendingSeries">
       <SectionHeader title="TRENDING SERIES" subtitle="STREAM ONLINE" />
       <ScrollRow>
         {SERIES_DATA?.map((movie) => (
@@ -40,7 +40,7 @@ const TrendingSeries = () => {
           </Link>
         ))}
       </ScrollRow>
-    </>
+    </section>
   );
 };
 

@@ -37,7 +37,7 @@ const TrendingPeople = () => {
     );
   }
   return (
-    <>
+    <section id="trendingPeople">
       <SectionHeader
         title="TRENDING PEOPEL"
         subtitle="CAST & CREW"
@@ -48,7 +48,7 @@ const TrendingPeople = () => {
           <PersonCard key={actor.id} item={actor} />
         ))}
       </ScrollRow>
-    </>
+    </section>
   );
 };
 

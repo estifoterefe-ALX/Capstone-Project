@@ -1,5 +1,9 @@
 import React from "react";
-import { PosterCard,SectionHeader,ScrollRow } from "../utils/helperComponents";
+import {
+  PosterCard,
+  SectionHeader,
+  ScrollRow,
+} from "../utils/helperComponents";
 import { PosterCardSkeletonGrid } from "../utils/loadingComponents";
 import { PosterCardErrorGrid } from "../utils/errorComponents";
 import useLandingPage from "../../hooks/useTrending";
@@ -27,7 +31,7 @@ const TrendingMovies = () => {
     );
   }
   return (
-    <section>
+    <section id="trendingMovies">
       <SectionHeader title="TRENDING SECTION" subtitle="POPULAR SECTION" />
       <ScrollRow>
         {TRENDING_MOVIES?.map((movie) => (

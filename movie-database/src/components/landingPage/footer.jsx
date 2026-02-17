@@ -1,6 +1,15 @@
 import React from "react";
 
 const Footer = () => {
+  const handleClickFun = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <footer className="bg-gray-100 dark:bg-black/40 mt-20 pt-16 pb-8 px-8 md:px-16 border-t border-gray-300 dark:border-gray-800">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
@@ -19,13 +28,22 @@ const Footer = () => {
             Trending
           </h4>
           <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("trendingMovies")}
+            >
               Trending Movies
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("trendingSeries")}
+            >
               Trending Series
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("trendingPeople")}
+            >
               Trending People
             </li>
           </ul>
@@ -35,16 +53,28 @@ const Footer = () => {
             Movies
           </h4>
           <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("nowPlaying")}
+            >
               Now Playing
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("popular")}
+            >
               Popular
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("topRated")}
+            >
               Top Rated
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("upcoming")}
+            >
               Upcoming
             </li>
           </ul>
@@ -54,14 +84,29 @@ const Footer = () => {
             TV Shows
           </h4>
           <ul className="text-gray-600 dark:text-gray-500 text-sm space-y-2">
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("airingToday")}
+            >
               Airing Today
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("onTheAir")}
+            >
               On TV
             </li>
-            <li className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors">
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("topRatedS")}
+            >
               Top Rated
+            </li>
+            <li
+              className="hover:text-yellow-600 dark:hover:text-yellow-500 cursor-pointer transition-colors"
+              onClick={() => handleClickFun("popularS")}
+            >
+              Popular
             </li>
           </ul>
         </div>

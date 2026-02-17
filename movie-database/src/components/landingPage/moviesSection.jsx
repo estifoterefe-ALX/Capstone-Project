@@ -35,50 +35,55 @@ const MoviesSection = () => {
       <CategoryHeader title="Movies" />
 
       <div className="pl-4">
-        <NormalHeader title={"NOW PLAYING"} hasViewAll={true} />
-        <MediaRow
-          data={nowPlayingMoviesData}
-          error={nowPlayingMoviesError}
-          loading={nowPlayingMoviesLoading}
-          CardComponent={LandscapeCard}
-          SkeletonComponent={LandscapeCardSkeletonGrid}
-          ErrorComponent={LandscapeCardErrorGrid}
-          type={"movie"}
-        />
-
-        <NormalHeader title={"popular"} hasViewAll={true} />
-        <MediaRow
-          data={popularMoviesData}
-          error={popularMoviesError}
-          loading={popularMoviesLoading}
-          CardComponent={PosterCard}
-          SkeletonComponent={PosterCardSkeletonGrid}
-          ErrorComponent={PosterCardErrorGrid}
-          type={"movie"}
-        />
-
-        <NormalHeader title={"top rated"} hasViewAll={true} />
-        <MediaRow
-          data={topRatedMoviesData}
-          error={topRatedMoviesError}
-          loading={topRatedMoviesLoading}
-          CardComponent={PosterCard}
-          SkeletonComponent={PosterCardSkeletonGrid}
-          ErrorComponent={PosterCardErrorGrid}
-          type={"movie"}
-        />
-
-        <NormalHeader title={"upcoming"} hasViewAll={true} />
-        <MediaRow
-          data={upcomingMoviesData}
-          error={upcomingMoviesError}
-          loading={upcomingMoviesLoading}
-          CardComponent={LandscapeCard}
-          SkeletonComponent={LandscapeCardSkeletonGrid}
-          ErrorComponent={LandscapeCardErrorGrid}
-          isUpcoming={true}
-          type={"movie"}
-        />
+        <section id="nowPlaying">
+          <NormalHeader title={"NOW PLAYING"} hasViewAll={true} />
+          <MediaRow
+            data={nowPlayingMoviesData}
+            error={nowPlayingMoviesError}
+            loading={nowPlayingMoviesLoading}
+            CardComponent={LandscapeCard}
+            SkeletonComponent={LandscapeCardSkeletonGrid}
+            ErrorComponent={LandscapeCardErrorGrid}
+            type={"movie"}
+          />
+        </section>
+        <section id="popular">
+          <NormalHeader title={"popular"} hasViewAll={true} />
+          <MediaRow
+            data={popularMoviesData}
+            error={popularMoviesError}
+            loading={popularMoviesLoading}
+            CardComponent={PosterCard}
+            SkeletonComponent={PosterCardSkeletonGrid}
+            ErrorComponent={PosterCardErrorGrid}
+            type={"movie"}
+          />
+        </section>
+        <section id="topRated">
+          <NormalHeader title={"top rated"} hasViewAll={true} />
+          <MediaRow
+            data={topRatedMoviesData}
+            error={topRatedMoviesError}
+            loading={topRatedMoviesLoading}
+            CardComponent={PosterCard}
+            SkeletonComponent={PosterCardSkeletonGrid}
+            ErrorComponent={PosterCardErrorGrid}
+            type={"movie"}
+          />
+        </section>
+        <section id="upcoming">
+          <NormalHeader title={"upcoming"} hasViewAll={true} />
+          <MediaRow
+            data={upcomingMoviesData}
+            error={upcomingMoviesError}
+            loading={upcomingMoviesLoading}
+            CardComponent={LandscapeCard}
+            SkeletonComponent={LandscapeCardSkeletonGrid}
+            ErrorComponent={LandscapeCardErrorGrid}
+            isUpcoming={true}
+            type={"movie"}
+          />
+        </section>
       </div>
     </>
   );
