@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { searchMovie, searchAll, searchSeries } from "../service/seach";
 
 
-const useSearch = ({ item, searchBy,page=1 }) => {
+const useSearch = ({ item, searchBy,page}) => {
     const queryFn = () => {
         if (searchBy === "movie") return searchMovie(item,page);
         if (searchBy === "series") return searchSeries(item,page);        // you can create searchTv similarly
@@ -13,17 +13,16 @@ const useSearch = ({ item, searchBy,page=1 }) => {
         queryKey: ["seach", item, searchBy,page],
         queryFn,
         enabled: !!item,
-        keepPreviousData: true,
     })
-    console.log("LKLK", searchResult1)
+    const filteredResults = searchResult1?.results.filter(
+        item => item.media_type === "movie" || item.media_type === "tv"
+      );
+    console.log("LKLK", searchResult1,page,filteredResults)
     return ({
-        searchResult: searchResult1?.results,
+        searchResult: filteredResults?.length!=0?filteredResults:searchResult1?.results,
         searchLoading,
         searchError,
-        searchCount: searchResult1?.total_results,
-        searchPage: searchResult1?.currentPage, 
-        totalPages: searchResult1?.totalPages, 
-        totalResults:searchResult1?.totalResults
+        searchCount:filteredResults?.length!==0? filteredResults?.length:searchResult1?.total_results        ,
     })
 }
 export default useSearch

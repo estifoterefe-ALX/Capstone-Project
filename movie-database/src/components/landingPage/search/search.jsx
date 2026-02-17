@@ -1,13 +1,20 @@
 import React from "react";
-import { ArrowLeft, ChevronUp, SlidersHorizontal, Search } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronUp,
+  SlidersHorizontal,
+  Search,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import ResultCard from "./result";
-import Pagination from "./pagination";
 import TopBar from "../../content/TopBar";
 import { useState } from "react";
 import useSearch from "../../../hooks/useSearch";
 import { Loader } from "../../utils/Loader";
 import { Error } from "../../utils/Error";
 import { YearDisplay, RoundToOneDecimal } from "../../utils/dateFormater";
+import { Link } from "react-router-dom";
 
 function SearchPage() {
   const seachItems = [
@@ -18,16 +25,24 @@ function SearchPage() {
     { id: "movie", name: "Movies" },
     { id: "series", name: "TV Shows" },
   ];
-  const [searchInput, setSearchInput] = useState();
+  const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(1);
   const [submittedQuery, setSubmittedQuery] = useState({
     item: "",
     searchBy: "all",
+  });
+  const { searchResult, searchLoading, searchError, searchCount } = useSearch({
+    item: submittedQuery.item,
+    searchBy: submittedQuery.searchBy,
     page,
   });
-  const { searchResult, searchLoading, searchError, totalPages, totalResults } =
-    useSearch(submittedQuery);
-  console.log(totalPages);
+  console.log(
+    searchCount,
+    submittedQuery,
+    "uuu",
+    searchCount / 10,
+    searchResult,
+  );
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmittedQuery((prev) => ({
@@ -35,12 +50,14 @@ function SearchPage() {
       item: searchInput,
     }));
   };
+
   if (searchLoading) {
     return <Loader />;
   }
   if (searchError) {
     return <Error message="Search Failed" />;
   }
+
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white font-sans p-8 md:p-12 transition-colors duration-200">
       {/* Top Nav */}
@@ -54,21 +71,21 @@ function SearchPage() {
         <div className="relative h-full border-r border-gray-300 dark:border-white/10 group hover:border-yellow-500/50 transition-colors">
           <select
             className="h-full px-6 pr-10 bg-white dark:bg-[#1c1c1c] cursor-pointer text-sm font-medium outline-none w-full appearance-none text-gray-800 dark:text-gray-300 focus:ring-2 focus:ring-yellow-500 dark:focus:ring-yellow-400 focus:border-transparent"
-            defaultValue="all"
+            value={submittedQuery.searchBy}
+            onChange={(e) =>
+              setSubmittedQuery((prev) => ({
+                ...prev,
+                item: "",
+                searchBy: e.target.value,
+              }))
+            }
           >
             {seachItems.map((item) => (
               <option
                 value={item.id}
                 className="bg-white dark:bg-[#1c1c1c] text-gray-800 dark:text-gray-300"
                 key={item.id}
-                onChange={(e) =>
-                  setSubmittedQuery((prev) => ({
-                    ...prev,
-                    searchBy: e.target.value,
-                  }))
-                }
               >
-                Search By:
                 {item.name}
               </option>
             ))}
@@ -105,7 +122,7 @@ function SearchPage() {
                 Search Results
               </h1>
               <p className="text-yellow-500 dark:text-yellow-400 text-sm font-medium">
-                {totalResults + " results found for " + searchInput}
+                {searchCount + " results found for " + searchInput}
               </p>
             </div>
 
@@ -118,36 +135,68 @@ function SearchPage() {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {searchResult?.map((item) => (
-              <ResultCard
-                variant="active"
-                data={{
-                  title: item.title || item.name,
-                  year: YearDisplay(item.release_date || item.first_air_date),
-                  rating: RoundToOneDecimal(item.vote_average),
-                  duration: "",
-                  type: item.media_type || submittedQuery.searchBy,
-                  img: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
-                }}
-              />
+              <Link
+                key={item.id}
+                to={`/detailCaller/${item.id}?type=${item.media_type || submittedQuery.searchBy}`}
+              >
+                <ResultCard
+                  variant="active"
+                  data={{
+                    title: item.title || item.name,
+                    year: YearDisplay(item.release_date || item.first_air_date),
+                    rating: RoundToOneDecimal(item.vote_average),
+                    duration: "",
+                    type: item.media_type || submittedQuery.searchBy,
+                    img: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
+                  }}
+                />
+              </Link>
             ))}
           </div>
         </>
       )}
+      {searchResult && (
+        <div className="flex items-center justify-center gap-2 mt-8">
+          <button
+            disabled={page <= 1}
+            onClick={() => setPage(page - 1)}
+            className={`
+          flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200
+          ${
+            page <= 1
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-yellow-600 text-white hover:bg-yellow-700 active:scale-95 shadow-md hover:shadow-lg"
+          }
+        `}
+            aria-label="Previous page"
+          >
+            <ChevronLeft size={20} />
+            <span>Prev</span>
+          </button>
 
-      {/* Pagination */}
-      {/* <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
-        Prev
-      </button>
-      <button disabled={page >= totalPages} onClick={() => setPage(page + 1)}>
-        Next
-      </button> */}
+          {/* Page indicator */}
+          <span className="px-4 py-2 bg-gray-100 rounded-lg text-gray-700 font-medium">
+            Page {page} of {Math.ceil(searchCount / 10) || 1}
+          </span>
 
-      {/* Back to Top */}
-      <div className="flex justify-center mt-12">
-        <button className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors">
-          Back to Top <ChevronUp size={12} />
-        </button>
-      </div>
+          <button
+            disabled={page >= Math.ceil(searchCount / 10)}
+            onClick={() => setPage(page + 1)}
+            className={`
+          flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200
+          ${
+            page >= Math.ceil(searchCount / 10)
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-yellow-600 text-white hover:bg-yellow-700 active:scale-95 shadow-md hover:shadow-lg"
+          }
+        `}
+            aria-label="Next page"
+          >
+            <span>Next</span>
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

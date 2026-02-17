@@ -213,9 +213,6 @@ const MovieDetails = () => {
                         PRODUCTION
                       </span>
                     </div>
-                    <h3 className="text-gray-900 text-lg font-black uppercase tracking-tight">
-                      {company.name}
-                    </h3>
                     <p className="text-gray-700 text-sm">Studio Partner</p>
                   </div>
                 </div>

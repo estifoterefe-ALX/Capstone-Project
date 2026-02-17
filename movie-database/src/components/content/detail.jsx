@@ -10,7 +10,11 @@ import {
 import { RecommendationCard, NoRecommendations } from "./recommendations";
 import TopBar from "./TopBar";
 import MetadataItem from "./metaData";
-import { FullDateDisplay, YearDisplay } from "../utils/dateFormater";
+import {
+  FullDateDisplay,
+  YearDisplay,
+  FormatNumberWithComma,
+} from "../utils/dateFormater";
 import { Link } from "react-router-dom";
 
 export default function Detail({
@@ -72,7 +76,7 @@ export default function Detail({
             <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
             <div className="flex items-center gap-1 text-yellow-900 dark:text-yellow-400">
               <Star size={14} fill="currentColor" />
-              <span>{items?.vote_average}</span>
+              <span>{items?.vote_average?.toFixed(1)}</span>
             </div>
           </div>
 
@@ -127,7 +131,11 @@ export default function Detail({
               />
               <MetadataItem
                 label="Budget"
-                value={items?.budget ? items?.budget : "No Budget Info"}
+                value={
+                  items?.budget
+                    ? "$" + FormatNumberWithComma(items?.budget)
+                    : "No Budget Info"
+                }
                 isHighlight
               />
             </div>
