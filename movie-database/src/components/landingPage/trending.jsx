@@ -4,10 +4,12 @@ import useLandingPage from "../../hooks/useTrending";
 import { Loader } from "../utils/Loader";
 import { Error } from "../utils/Error";
 import WatchTrailerButton from "../utils/watchTrailer";
+import { useNavigate } from "react-router-dom";
 
 const Trending = () => {
   const { slides, isLoading, error } = useLandingPage();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
   // Auto-rotate slides every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,7 +72,14 @@ const Trending = () => {
             </p>
             <div className="flex gap-4">
               <WatchTrailerButton id={slide.id} type={slide.media_type} />
-              <button className="bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 border border-gray-300 dark:border-white/20 transition">
+              <button
+                className="bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 border border-gray-300 dark:border-white/20 transition cursor-pointer"
+                onClick={() =>
+                  navigate(
+                    `/detailCaller/${slide.id}?type=${slide.media_type === "movie" ? "movie" : "series"}`,
+                  )
+                }
+              >
                 <Info size={20} /> More Info
               </button>
             </div>

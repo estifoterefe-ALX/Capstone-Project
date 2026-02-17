@@ -6,7 +6,7 @@ import Series from "./components/content/series/series";
 import DetailCaller from "./components/content/detailCaller";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchPage from "./components/landingPage/search/search";
-import LogIn from "./components/landingPage/login";
+import LoginPage from "./components/landingPage/login";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -14,7 +14,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/login" element={<LogIn />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/" element={<LandingPage />} />
             <Route path="/detailCaller/:id" element={<DetailCaller />} />
             <Route path="/movies/:id" element={<Movies />} />
