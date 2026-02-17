@@ -36,13 +36,6 @@ function SearchPage() {
     searchBy: submittedQuery.searchBy,
     page,
   });
-  console.log(
-    searchCount,
-    submittedQuery,
-    "uuu",
-    searchCount / 10,
-    searchResult,
-  );
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmittedQuery((prev) => ({

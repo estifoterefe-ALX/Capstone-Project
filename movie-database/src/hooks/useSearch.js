@@ -17,7 +17,6 @@ const useSearch = ({ item, searchBy,page}) => {
     const filteredResults = searchResult1?.results.filter(
         item => item.media_type === "movie" || item.media_type === "tv"
       );
-    console.log("LKLK", searchResult1,page,filteredResults)
     return ({
         searchResult: filteredResults?.length!=0?filteredResults:searchResult1?.results,
         searchLoading,
