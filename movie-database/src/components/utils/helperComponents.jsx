@@ -46,7 +46,7 @@ export const PosterCard = ({ item, hasRating }) => (
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md dark:shadow-gray-900/30">
       <img
         src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
-        alt={item.title}
+        alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 dark:group-hover:bg-black/40 transition" />
@@ -59,7 +59,7 @@ export const PosterCard = ({ item, hasRating }) => (
       )}
     </div>
     <h3 className="text-gray-900 dark:text-white text-sm font-medium truncate group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-      {item.title}
+      {item.name || item.title || item.name}
     </h3>
   </div>
 );
@@ -69,7 +69,7 @@ export const LandscapeCard = ({ item, isUpcoming }) => (
     <div className="relative aspect-video overflow-hidden rounded-lg shadow-md dark:shadow-gray-900/30">
       <img
         src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
-        alt={item.title}
+        alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
       />
 
@@ -88,7 +88,7 @@ export const LandscapeCard = ({ item, isUpcoming }) => (
 
         {/* Title below date */}
         <h3 className="text-gray-900 dark:text-white text-sm font-bold uppercase leading-tight line-clamp-2">
-          {item.title}
+          {item.title || item.name}
         </h3>
       </div>
     </div>

@@ -52,7 +52,7 @@ const ResultCard = ({ variant = "default", data }) => {
     <div
       className={`relative aspect-2/3 rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 border border-gray-300 dark:border-gray-800 ${
         isActive
-          ? "ring-2 ring-yellow-500 dark:ring-white shadow-[0_0_20px_rgba(234,179,8,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] scale-105 z-10"
+          ? "ring-2 ring-yellow-500 dark:ring-white shadow-[0_0_20px_rgba(234,179,8,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] scale-105 z-10 mb-3"
           : "hover:ring-1 hover:ring-yellow-500/50 dark:hover:ring-gray-600"
       }`}
     >

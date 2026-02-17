@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Moon, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import ThemeToggle from "../utils/themeToggle";
+import { useNavigate } from "react-router-dom";
 const items = [
   {
     id: "home",
@@ -22,6 +23,7 @@ const items = [
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const navigate = useNavigate();
   const handleClick = (id) => {
     setActiveTab(id);
     const el = document.getElementById(id);
@@ -58,7 +60,10 @@ const Header = () => {
       </div>
       <div className="flex items-center gap-6">
         <ThemeToggle />
-        <button className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors">
+        <button
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer transition-colors"
+          onClick={() => navigate("/search")}
+        >
           <Search size={20} />
         </button>
         <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden border border-gray-300 dark:border-gray-600 cursor-pointer">

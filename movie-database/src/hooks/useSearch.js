@@ -1,0 +1,29 @@
+import { useQuery } from "@tanstack/react-query";
+import { searchMovie, searchAll, searchSeries } from "../service/seach";
+
+
+const useSearch = ({ item, searchBy,page=1 }) => {
+    const queryFn = () => {
+        if (searchBy === "movie") return searchMovie(item,page);
+        if (searchBy === "series") return searchSeries(item,page);        // you can create searchTv similarly
+        if (searchBy === "all") return searchAll(item,page);  // optional multi-search
+    };
+
+    const { data: searchResult1, isLoading: searchLoading, error: searchError} = useQuery({
+        queryKey: ["seach", item, searchBy,page],
+        queryFn,
+        enabled: !!item,
+        keepPreviousData: true,
+    })
+    console.log("LKLK", searchResult1)
+    return ({
+        searchResult: searchResult1?.results,
+        searchLoading,
+        searchError,
+        searchCount: searchResult1?.total_results,
+        searchPage: searchResult1?.currentPage, 
+        totalPages: searchResult1?.totalPages, 
+        totalResults:searchResult1?.totalResults
+    })
+}
+export default useSearch
