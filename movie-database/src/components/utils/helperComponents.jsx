@@ -8,7 +8,6 @@ export const SectionHeader = ({
   onViewAll,
 }) => (
   <div className="flex justify-between items-end mb-6 px-8 md:px-16">
-    {console.log({ hasViewAll, onViewAll })}
     <div>
       {subtitle && (
         <p className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">

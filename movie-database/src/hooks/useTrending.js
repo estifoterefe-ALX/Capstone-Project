@@ -22,7 +22,6 @@ const trendingPeople=useQuery({
   queryFn:trendingPeopleService,
   enabled:type==="trendingPeople"
 })
-console.log("SDFASDF",trendingMovies,page)
   return {
     slidesItems:{
       slides:trendingItem.data?.results,
