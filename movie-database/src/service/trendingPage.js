@@ -11,11 +11,12 @@ export const trending = async () => {
     throw error;
   }
 };
-export const trendingMovies = async () => {
+export const trendingMoviesService = async (page) => {
   try {
     const response = await landingApi.get("/trending/movie/day",{
       params:{
-        language:"en-US"
+        language:"en-US",
+        page
       }
     })
     return response?.data
@@ -24,11 +25,12 @@ export const trendingMovies = async () => {
     throw error
   }
 }
-export const trendingSeries = async () => {
+export const trendingSeriesService = async (page) => {
   try {
     const response = await landingApi.get("/trending/tv/day",{
       params:{
-        language:"en-US"
+        language:"en-US",
+        page
       }
     })
     return response?.data
@@ -37,7 +39,7 @@ export const trendingSeries = async () => {
     throw error
   }
 }
-export const trendingPeople = async () => {
+export const trendingPeopleService = async () => {
   try {
     const response = await landingApi.get("/trending/person/day",{
       params:{

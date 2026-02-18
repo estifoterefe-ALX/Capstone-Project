@@ -1,36 +1,47 @@
-import { trending,trendingMovies, trendingPeople, trendingSeries } from "../service/trendingPage";
+import { trending,trendingMoviesService, trendingPeopleService, trendingSeriesService } from "../service/trendingPage";
 import { useQuery } from "@tanstack/react-query";
 
-const useLandingPage = () => {
-  const { data, isLoading, error } = useQuery({
+const useLandingPage = (type,page=1,) => {
+  const trendingItem = useQuery({
     queryKey: ["trending"],
     queryFn: trending,
+    enabled:type==="all"
   });
-const {data:trendingMoviesData , isLoading:trendingMoviesLoading ,error:trendingMoviesError}=useQuery({
-  queryKey:["trendingMovies"],
-  queryFn:trendingMovies,
+const trendingMovies=useQuery({
+  queryKey:["trendingMovies",page],
+  queryFn:()=>trendingMoviesService(page),
+  enabled: type==="trendingMovies"
 })
-const {data:trendingSeriesData , isLoading:trendingSeriesLoading ,error:trendingSeriesError}=useQuery({
-  queryKey:["trendingSeries"],
-  queryFn:trendingSeries,
+const trendingSeries=useQuery({
+  queryKey:["trendingSeries",page],
+  queryFn:()=>trendingSeriesService(page),
+  enabled:type==="trendingSeries"
 })
-const {data:trendingPeopleData , isLoading:trendingPeopleLoading ,error:trendingPeopleError}=useQuery({
+const trendingPeople=useQuery({
   queryKey:["trendingPeople"],
-  queryFn:trendingPeople,
+  queryFn:trendingPeopleService,
+  enabled:type==="trendingPeople"
 })
+console.log("SDFASDF",trendingMovies,page)
   return {
-    slides:data?.results,
-    isLoading,
-    error,
-    trendingMoviesData:trendingMoviesData?.results,
-    trendingMoviesLoading,
-    trendingMoviesError,
-    trendingSeriesData:trendingSeriesData?.results,
-    trendingSeriesLoading,
-    trendingSeriesError,
-    trendingPeopleData:trendingPeopleData?.results,
-    trendingPeopleLoading,
-    trendingPeopleError,
+    slidesItems:{
+      slides:trendingItem.data?.results,
+      loading:trendingItem.isLoading,
+      error:trendingItem.error
+    },
+    trendingMovies:{
+      data:trendingMovies.data?.results,
+      loading:trendingMovies.isLoading,
+      error:trendingMovies.error,
+      count:trendingMovies.data?.total_results
+    },
+    trendingSeries:{
+      data:trendingSeries.data?.results,
+      loading:trendingSeries.isLoading,
+      error:trendingSeries.error,
+      count:trendingSeries.data?.total_results
+    },
+    trendingPeople
   };
 };
 

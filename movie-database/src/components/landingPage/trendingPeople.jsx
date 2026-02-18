@@ -7,12 +7,9 @@ import { PersonCardSkeletonGrid } from "../utils/loadingComponents";
 import { PersonCardErrorGrid } from "../utils/errorComponents";
 import useLandingPage from "../../hooks/useTrending";
 const TrendingPeople = () => {
-  const {
-    trendingPeopleData: ACTORS,
-    trendingPeopleLoading,
-    trendingPeopleError,
-  } = useLandingPage();
-  if (trendingPeopleError) {
+  const { trendingPeople } = useLandingPage("trendingPeople");
+  const ACTORS = trendingPeople.data?.results;
+  if (trendingPeople.error) {
     return (
       <section>
         <SectionHeader
@@ -24,7 +21,7 @@ const TrendingPeople = () => {
       </section>
     );
   }
-  if (trendingPeopleLoading) {
+  if (trendingPeople.isLoading) {
     return (
       <section>
         <SectionHeader

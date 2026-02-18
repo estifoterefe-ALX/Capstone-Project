@@ -1,48 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
-import { upComingMovies, topRatedMovies, nowPlayingMovies, popularMovies, movieDetail, movieRecommendations, moviePeople ,movieVideo} from "../service/movies";
+import { upComingMoviesService, topRatedMoviesService, nowPlayingMoviesService, popularMoviesService, movieDetailService, movieRecommendationsService, moviePeopleService ,movieVideoService} from "../service/movies";
 
-const useMovies = (id, type) => {
+const useMovies = (id, type,page=1) => {
     const { data: upcomingMoviesData, isLoading: upcomingMoviesLoading, error: upcomingMoviesError } = useQuery({
         queryKey: ["upcomingMovies"],
-        queryFn: upComingMovies,
+        queryFn: upComingMoviesService,
         staleTime: 60 * 1000,
     })
     const { data: topRatedMoviesData, isLoading: topRatedMoviesLoading, error: topRatedMoviesError } = useQuery({
         queryKey: ["topRatedMovies"],
-        queryFn: topRatedMovies,
+        queryFn: topRatedMoviesService,
         staleTime: 60 * 1000,
     })
     const { data: nowPlayingMoviesData, isLoading: nowPlayingMoviesLoading, error: nowPlayingMoviesError } = useQuery({
         queryKey: ["nowPlayingMovies"],
-        queryFn: nowPlayingMovies,
+        queryFn: nowPlayingMoviesService,
         staleTime: 60 * 1000,
     })
     const { data: popularMoviesData, isLoading: popularMoviesLoading, error: popularMoviesError } = useQuery({
         queryKey: ["popularMovies"],
-        queryFn: popularMovies,
+        queryFn: popularMoviesService,
         staleTime: 60 * 1000,
     })
     const { data: movieDetailData, isLoading: movieDetailLoading, error: movieDetailError, refetch: movieDetailRefresh } = useQuery({
         queryKey: ["movieDetail", id],
-        queryFn: () => movieDetail(id),
+        queryFn: () => movieDetailService(id),
         enabled: type === "movie",
         staleTime: 10 * 60 * 1000,
     })
     const { data: movieRecommendationData, isLoading: movieRecommendationLoading, error: movieRecommendationError } = useQuery({
         queryKey: ["movieRecommendation", id],
-        queryFn: () => movieRecommendations(id),
+        queryFn: () => movieRecommendationsService(id),
         enabled: type === "movie",
         staleTime: 5 * 60 * 1000,
     })
     const { data: moviePeopleData, isLoading: moviePeopleLoading, error: moviePeopleError } = useQuery({
         queryKey: ["moviePeople", id],
-        queryFn: () => moviePeople(id),
+        queryFn: () => moviePeopleService(id),
         enabled: type === "movie",
         staleTime: 5 * 60 * 1000,
     })
     const { data: movieVideoData, isLoading: movieVideoLoading, error: movieVideoError } = useQuery({
         queryKey: ["movieVideo", id],
-        queryFn: () => movieVideo(id),
+        queryFn: () => movieVideoService(id),
         enabled: type === "movie",
         staleTime: 5 * 60 * 1000,
     })
@@ -69,7 +69,27 @@ const useMovies = (id, type) => {
         moviePeopleData,
         moviePeopleError,
         moviePeopleLoading,
-        movieVideoData:movieVideoData?.results?.find((item)=>item.site==="YouTube" && item.type==="Trailer")
+        movieVideoData:movieVideoData?.results?.find((item)=>item.site==="YouTube" && item.type==="Trailer"),
+        popularMovies:{
+            data:popularMoviesData?.results,
+            loading:popularMoviesLoading,
+            error:popularMoviesError
+        },
+        topRatedMovies:{
+            data:topRatedMoviesData?.results,
+            loading:topRatedMoviesLoading,
+            error:topRatedMoviesError
+        },
+        nowPlayingMovies:{
+            data:nowPlayingMoviesData?.results,
+            loading:nowPlayingMoviesLoading,
+            error:nowPlayingMoviesError
+        },
+        upcomingMovies:{
+            data:upcomingMoviesData?.results,
+            loading:upcomingMoviesLoading,
+            error:upcomingMoviesError
+        }
 
     })
 }

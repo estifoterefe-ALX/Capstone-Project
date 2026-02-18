@@ -1,8 +1,14 @@
 import { Play, ChevronRight } from "lucide-react";
 import { dateFormater } from "./dateFormater";
 import { Link } from "react-router-dom";
-export const SectionHeader = ({ title, subtitle, hasViewAll = true }) => (
+export const SectionHeader = ({
+  title,
+  subtitle,
+  hasViewAll = true,
+  onViewAll,
+}) => (
   <div className="flex justify-between items-end mb-6 px-8 md:px-16">
+    {console.log({ hasViewAll, onViewAll })}
     <div>
       {subtitle && (
         <p className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase tracking-wider mb-1">
@@ -14,20 +20,26 @@ export const SectionHeader = ({ title, subtitle, hasViewAll = true }) => (
       </h2>
     </div>
     {hasViewAll && (
-      <button className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase flex items-center gap-1 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors">
+      <button
+        className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase flex items-center gap-1 hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors"
+        onClick={() => onViewAll?.()}
+      >
         View All <ChevronRight size={14} />
       </button>
     )}
   </div>
 );
-export const NormalHeader = ({ title, hasViewAll }) => {
+export const NormalHeader = ({ title, hasViewAll, onViewAll }) => {
   return (
     <div className="flex mb-6 mx-10">
       <h3 className="text-gray-700 dark:text-gray-300 font-bold text-sm uppercase">
         {title}
       </h3>
       {hasViewAll && (
-        <button className="text-yellow-700 px-2 mx-4 border border-yellow-700 dark:border-yellow-300 dark:text-yellow-300 text-xs font-bold uppercase flex items-center gap-1 hover:text-yellow-800 dark:hover:text-yellow-400 transition-colors cursor-pointer">
+        <button
+          className="text-yellow-700 px-2 mx-4 border border-yellow-700 dark:border-yellow-300 dark:text-yellow-300 text-xs font-bold uppercase flex items-center gap-1 hover:text-yellow-800 dark:hover:text-yellow-400 transition-colors cursor-pointer"
+          onClick={() => onViewAll?.()}
+        >
           View All
         </button>
       )}
@@ -43,6 +55,29 @@ export const ScrollRow = ({ children }) => (
 
 export const PosterCard = ({ item, hasRating }) => (
   <div className="flex-none w-[160px] group cursor-pointer">
+    <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md dark:shadow-gray-900/30">
+      <img
+        src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
+        alt={item.title || item.name}
+        className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 dark:group-hover:bg-black/40 transition" />
+
+      {/* Rating badge - top right corner */}
+      {hasRating && (
+        <div className="absolute top-2 right-2 bg-yellow-500 text-gray-900 text-xs font-bold px-2 py-1 rounded-md shadow-md">
+          {item.vote_average?.toFixed(1) || "N/A"}
+        </div>
+      )}
+    </div>
+    <h3 className="text-gray-900 dark:text-white text-sm font-medium truncate group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
+      {item.name || item.title || item.name}
+    </h3>
+  </div>
+);
+export const ViewAllPoster = ({ item, hasRating }) => (
+  <div className="w-full group cursor-pointer">
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md dark:shadow-gray-900/30">
       <img
         src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}

@@ -1,6 +1,6 @@
 import landingApi from "./apis/landingApi";
 
-export const nowPlayingMovies = async () => {
+export const nowPlayingMoviesService = async () => {
     try {
         const response = await landingApi.get("/movie/now_playing",{
             params:{
@@ -13,7 +13,7 @@ export const nowPlayingMovies = async () => {
         throw error
     }
 }
-export const popularMovies = async () => {
+export const popularMoviesService = async () => {
     try {
         const response = await landingApi.get("/movie/popular",{
             params:{
@@ -26,7 +26,7 @@ export const popularMovies = async () => {
         throw error
     }
 }
-export const topRatedMovies = async () => {
+export const topRatedMoviesService = async () => {
     try {
         const response = await landingApi.get("/movie/top_rated",{
             params:{
@@ -39,7 +39,7 @@ export const topRatedMovies = async () => {
         throw error
     }
 }
-export const upComingMovies = async () => {
+export const upComingMoviesService = async () => {
     try {
         const response = await landingApi.get("/movie/upcoming",{
             params:{
@@ -52,7 +52,7 @@ export const upComingMovies = async () => {
         throw error
     }
 }
-export const movieDetail = async (id) => {
+export const movieDetailService = async (id) => {
     try {
         const response = await landingApi.get(`/movie/${id}`,{
             params:{
@@ -65,7 +65,7 @@ export const movieDetail = async (id) => {
         throw error
     }
 }
-export const movieRecommendations = async (id) => {
+export const movieRecommendationsService = async (id) => {
     try {
         const response = await landingApi.get(`/movie/${id}/recommendations`,{
             params:{
@@ -78,7 +78,7 @@ export const movieRecommendations = async (id) => {
         throw error
     }
 }
-export const moviePeople = async (id) => {
+export const moviePeopleService = async (id) => {
     try {
         const response = await landingApi.get(`/movie/${id}/credits`,{
             params:{
@@ -91,7 +91,7 @@ export const moviePeople = async (id) => {
         throw error
     }
 }
-export const movieVideo = async (id) => {
+export const movieVideoService = async (id) => {
     try {
         const response = await landingApi.get(`/movie/${id}/videos`,{
             params:{

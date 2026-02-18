@@ -14,7 +14,9 @@ import {
   PosterCardErrorGrid,
 } from "../utils/errorComponents";
 import useMovies from "../../hooks/useMovies";
+import { useNavigate } from "react-router-dom";
 const MoviesSection = () => {
+  const navigate = useNavigate();
   const {
     upcomingMoviesData,
     upcomingMoviesError,
@@ -36,7 +38,11 @@ const MoviesSection = () => {
 
       <div className="pl-4">
         <section id="nowPlaying">
-          <NormalHeader title={"NOW PLAYING"} hasViewAll={true} />
+          <NormalHeader
+            title={"NOW PLAYING"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/nowPlaying")}
+          />
           <MediaRow
             data={nowPlayingMoviesData}
             error={nowPlayingMoviesError}
@@ -48,7 +54,11 @@ const MoviesSection = () => {
           />
         </section>
         <section id="popular">
-          <NormalHeader title={"popular"} hasViewAll={true} />
+          <NormalHeader
+            title={"popular"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/popularMovies")}
+          />
           <MediaRow
             data={popularMoviesData}
             error={popularMoviesError}
@@ -60,7 +70,11 @@ const MoviesSection = () => {
           />
         </section>
         <section id="topRated">
-          <NormalHeader title={"top rated"} hasViewAll={true} />
+          <NormalHeader
+            title={"top rated"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/topRatedMovies")}
+          />
           <MediaRow
             data={topRatedMoviesData}
             error={topRatedMoviesError}
@@ -73,7 +87,11 @@ const MoviesSection = () => {
           />
         </section>
         <section id="upcoming">
-          <NormalHeader title={"upcoming"} hasViewAll={true} />
+          <NormalHeader
+            title={"upcoming"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/upcomingMovies")}
+          />
           <MediaRow
             data={upcomingMoviesData}
             error={upcomingMoviesError}

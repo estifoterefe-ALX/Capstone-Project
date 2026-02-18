@@ -5,8 +5,8 @@ import { searchMovie, searchAll, searchSeries } from "../service/seach";
 const useSearch = ({ item, searchBy,page}) => {
     const queryFn = () => {
         if (searchBy === "movie") return searchMovie(item,page);
-        if (searchBy === "series") return searchSeries(item,page);        // you can create searchTv similarly
-        if (searchBy === "all") return searchAll(item,page);  // optional multi-search
+        if (searchBy === "series") return searchSeries(item,page);
+        if (searchBy === "all") return searchAll(item,page); 
     };
 
     const { data: searchResult1, isLoading: searchLoading, error: searchError} = useQuery({

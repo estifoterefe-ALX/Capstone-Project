@@ -1,10 +1,11 @@
 import landingApi from "./apis/landingApi";
 
-export const nowPlayingSeries = async () => {
+export const nowPlayingSeriesService = async (page) => {
     try {
         const response = await landingApi.get("/tv/airing_today",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -13,11 +14,12 @@ export const nowPlayingSeries = async () => {
         throw error
     }
 }
-export const popularSeries = async () => {
+export const popularSeriesService = async (page) => {
     try {
         const response = await landingApi.get("/tv/popular",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -26,11 +28,12 @@ export const popularSeries = async () => {
         throw error
     }
 }
-export const topRatedSeries = async () => {
+export const topRatedSeriesService = async (page) => {
     try {
         const response = await landingApi.get("/tv/top_rated",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -39,11 +42,12 @@ export const topRatedSeries = async () => {
         throw error
     }
 }
-export const upComingSeries = async () => {
+export const upComingSeriesService = async (page) => {
     try {
         const response = await landingApi.get("/tv/on_the_air",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -52,7 +56,7 @@ export const upComingSeries = async () => {
         throw error
     }
 }
-export const seriesDetail = async (id) => {
+export const seriesDetailService = async (id) => {
     try {
         const response = await landingApi.get(`/tv/${id}`,{
             params:{
@@ -65,7 +69,7 @@ export const seriesDetail = async (id) => {
         throw error
     }
 }
-export const seriesRecommendations = async (id) => {
+export const seriesRecommendationsService = async (id) => {
     try {
         const response = await landingApi.get(`/tv/${id}/recommendations`,{
             params:{
@@ -78,7 +82,7 @@ export const seriesRecommendations = async (id) => {
         throw error
     }
 }
-export const seriesPeople = async (id) => {
+export const seriesPeopleService = async (id) => {
     try {
         const response = await landingApi.get(`/tv/${id}/credits`,{
             params:{
@@ -91,7 +95,7 @@ export const seriesPeople = async (id) => {
         throw error
     }
 }
-export const seriesSeason =async (id,sennum) => {
+export const seriesSeasonService =async (id,sennum) => {
     try {
         const response = await landingApi.get(`/tv/${id}/season/${sennum}`,{
             params:{
@@ -105,7 +109,7 @@ export const seriesSeason =async (id,sennum) => {
     }
     
 }
-export const seriesSeasonEpsoide =async (id,sennum,epnum) => {
+export const seriesSeasonEpsoideService =async (id,sennum,epnum) => {
     try {
         const response = await landingApi.get(`/tv/${id}/season/${sennum}/epsoide/${epnum}`,{
             params:{
@@ -119,7 +123,7 @@ export const seriesSeasonEpsoide =async (id,sennum,epnum) => {
     }
     
 }
-export const seriesVideo =async (id) => {
+export const seriesVideoService =async (id) => {
     try {
         const response = await landingApi.get(`/tv/${id}/videos`,{
             params:{

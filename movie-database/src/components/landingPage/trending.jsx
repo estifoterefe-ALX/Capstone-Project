@@ -7,7 +7,10 @@ import WatchTrailerButton from "../utils/watchTrailer";
 import { useNavigate } from "react-router-dom";
 
 const Trending = () => {
-  const { slides, isLoading, error } = useLandingPage();
+  const { slidesItems } = useLandingPage("all");
+  const slides = slidesItems.slides;
+  const isLoading = slidesItems.loading;
+  const error = slidesItems.error;
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
   // Auto-rotate slides every 3 seconds

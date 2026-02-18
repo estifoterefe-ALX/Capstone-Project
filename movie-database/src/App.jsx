@@ -7,6 +7,7 @@ import DetailCaller from "./components/content/detailCaller";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchPage from "./components/landingPage/search/search";
 import LoginPage from "./components/landingPage/login";
+import ViewAll from "./components/content/viewAll";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/movies/:id" element={<Movies />} />
             <Route path="/series/:id" element={<Series />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/viewAll/:type" element={<ViewAll />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

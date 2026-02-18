@@ -14,7 +14,9 @@ import {
   PosterCardErrorGrid,
 } from "../utils/errorComponents";
 import useSeries from "../../hooks/useSeries";
+import { useNavigate } from "react-router-dom";
 const SeriesSection = () => {
+  const navigate = useNavigate();
   const {
     upcomingSeriesData,
     upcomingSeriesError,
@@ -35,7 +37,11 @@ const SeriesSection = () => {
       <CategoryHeader title="Series" />
       <div className="pl-4">
         <section id="airingToday">
-          <NormalHeader title={"Airing Today"} hasViewAll={true} />
+          <NormalHeader
+            title={"Airing Today"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/nowPlayingSeries")}
+          />
           <MediaRow
             data={nowPlayingSeriesData}
             error={nowPlayingSeriesError}
@@ -47,7 +53,11 @@ const SeriesSection = () => {
           />
         </section>
         <section id="toRatedS">
-          <NormalHeader title={"top rated"} hasViewAll={true} />
+          <NormalHeader
+            title={"top rated"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/topRatedSeries")}
+          />
           <MediaRow
             data={topRatedSeriesData}
             error={topRatedSeriesError}
@@ -60,7 +70,11 @@ const SeriesSection = () => {
           />
         </section>
         <section id="onTheAir">
-          <NormalHeader title={"on the air"} hasViewAll={true} />
+          <NormalHeader
+            title={"on the air"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/upcomingSeries")}
+          />
           <MediaRow
             data={upcomingSeriesData}
             error={upcomingSeriesError}
@@ -72,7 +86,11 @@ const SeriesSection = () => {
           />
         </section>
         <section id="popularS">
-          <NormalHeader title={"popular"} hasViewAll={true} />
+          <NormalHeader
+            title={"popular"}
+            hasViewAll={true}
+            onViewAll={() => navigate("/viewAll/popularSeries")}
+          />
           <MediaRow
             data={popularSeriesData}
             error={popularSeriesError}
