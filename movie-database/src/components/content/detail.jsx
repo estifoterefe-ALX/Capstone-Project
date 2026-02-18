@@ -15,8 +15,9 @@ import {
   YearDisplay,
   FormatNumberWithComma,
 } from "../utils/dateFormater";
+import { FullScreenLoader } from "../utils/Loader";
 import { Link } from "react-router-dom";
-
+import { Error } from "../utils/Error";
 export default function Detail({
   items,
   error,
@@ -26,6 +27,12 @@ export default function Detail({
   type,
   id,
 }) {
+  if (loading) {
+    return <FullScreenLoader />;
+  }
+  if (error) {
+    return <Error />;
+  }
   return (
     <div className="bg-white dark:bg-[#0b0d14] min-h-screen text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       <TopBar />
@@ -38,6 +45,7 @@ export default function Detail({
             src={`https://image.tmdb.org/t/p/w500/${items?.backdrop_path}`}
             alt="Background"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           {/* Complex Gradient to fade into body color */}
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-white/30 dark:from-[#0b0d14]/30 dark:via-[#0b0d14]/60 dark:to-[#0b0d14]" />
@@ -178,6 +186,7 @@ export default function Detail({
     group-hover/cast:shadow-xl cursor-pointer
     group-hover/cast:relative"
                       alt={cast.name}
+                      loading="lazy"
                     />
 
                     {/* Tooltip on hover */}

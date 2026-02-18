@@ -81,6 +81,7 @@ const Header = ({ isLoggedIn = false }) => {
                 src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100"
                 alt="User"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </button>
 

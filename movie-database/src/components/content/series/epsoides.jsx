@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import useSeries from "../../../hooks/useSeries";
 import { FullDateDisplay } from "../../utils/dateFormater";
+import { Error } from "../../utils/Error";
 export const EpisodeDisplay = ({ id, seasonNum }) => {
   const { seriesSeasonData, seriesSeasonError, seriesSeasonLoading } =
     useSeries(id, "series", seasonNum);
@@ -11,9 +12,13 @@ export const EpisodeDisplay = ({ id, seasonNum }) => {
       </h2>
 
       <div className="max-w-4xl">
-        {seriesSeasonData?.episodes?.map((ep) => (
-          <EpisodeCard key={ep.id} ep={ep} />
-        ))}
+        {seriesSeasonData?.episodes.length ? (
+          seriesSeasonData?.episodes?.map((ep) => (
+            <EpisodeCard key={ep.id} ep={ep} />
+          ))
+        ) : (
+          <Error message="No Episode Found For The Selected Season" />
+        )}
       </div>
     </div>
   );

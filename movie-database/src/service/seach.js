@@ -1,10 +1,11 @@
 import landingApi from "./apis/landingApi";
 
-export const searchMovie = async (query) => {
+export const searchMovie = async (query,page) => {
     try {
       const response = await landingApi.get("/search/movie", {
         params: {
           query,
+          page
         },
       });
       return response?.data
@@ -14,11 +15,12 @@ export const searchMovie = async (query) => {
     }
   };
   
-  export const searchSeries = async (query) => {
+  export const searchSeries = async (query,page) => {
     try {
       const response = await landingApi.get("/search/tv", {
         params: {
           query,
+          page
         },
       });
   

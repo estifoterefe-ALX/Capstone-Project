@@ -130,7 +130,7 @@ function SearchPage() {
             {searchResult?.map((item) => (
               <Link
                 key={item.id}
-                to={`/detailCaller/${item.id}?type=${item.media_type || submittedQuery.searchBy}`}
+                to={`/detailCaller/${item.id}?type=${(item.media_type === "movie" ? "movie" : "series") || submittedQuery.searchBy}`}
               >
                 <ResultCard
                   variant="active"

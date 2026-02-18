@@ -49,57 +49,60 @@ const ResultCard = ({ variant = "default", data }) => {
   const isActive = variant === "active";
 
   return (
-    <div
-      className={`relative aspect-2/3 rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 border border-gray-300 dark:border-gray-800 ${
-        isActive
-          ? "ring-2 ring-yellow-500 dark:ring-white shadow-[0_0_20px_rgba(234,179,8,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] scale-105 z-10 mb-3"
-          : "hover:ring-1 hover:ring-yellow-500/50 dark:hover:ring-gray-600"
-      }`}
-    >
-      <img
-        src={data.img}
-        alt={data.title}
-        className={`w-full h-full object-cover transition duration-500 ${
+    <>
+      <div
+        className={`relative aspect-2/3 rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 border border-gray-300 dark:border-gray-800 ${
           isActive
-            ? "opacity-100"
-            : "opacity-90 dark:opacity-70 group-hover:opacity-100"
+            ? "ring-2 ring-yellow-500 dark:ring-white shadow-[0_0_20px_rgba(234,179,8,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] scale-105 z-10 mb-3"
+            : "hover:ring-1 hover:ring-yellow-500/50 dark:hover:ring-gray-600"
         }`}
-      />
+      >
+        <img
+          src={data.img}
+          alt={data.title}
+          className={`w-full h-full object-cover transition duration-500 ${
+            isActive
+              ? "opacity-100"
+              : "opacity-90 dark:opacity-70 group-hover:opacity-100"
+          }`}
+          loading="lazy"
+        />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-80 dark:opacity-90" />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-80 dark:opacity-90" />
 
-      {/* Top Badges */}
-      <div className="absolute top-3 left-3 flex justify-between w-[calc(100%-24px)]">
-        <span className="bg-yellow-500 dark:bg-yellow-400 text-black text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide">
-          {data.type}
-        </span>
-        <div className="flex items-center gap-1 bg-black/40 dark:bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10">
-          <Star
-            size={10}
-            className="text-yellow-500 dark:text-yellow-400"
-            fill="currentColor"
-          />
-          <span className="text-white text-[10px] font-bold">
-            {data.rating}
+        {/* Top Badges */}
+        <div className="absolute top-3 left-3 flex justify-between w-[calc(100%-24px)]">
+          <span className="bg-yellow-500 dark:bg-yellow-400 text-black text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wide">
+            {data.type}
           </span>
+          <div className="flex items-center gap-1 bg-black/40 dark:bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded border border-white/10">
+            <Star
+              size={10}
+              className="text-yellow-500 dark:text-yellow-400"
+              fill="currentColor"
+            />
+            <span className="text-white text-[10px] font-bold">
+              {data.rating}
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom Info */}
+        <div className="absolute bottom-0 left-0 w-full p-4">
+          <p className="text-gray-300 dark:text-gray-400 text-xs font-medium">
+            {data.year} • {data.duration}
+          </p>
         </div>
       </div>
-
-      {/* Bottom Info */}
-      <div className="absolute bottom-0 left-0 w-full p-4">
-        <h3
-          className={`font-bold text-white mb-1 leading-tight ${
-            isActive ? "text-lg" : "text-base"
-          }`}
-        >
-          {data.title}
-        </h3>
-        <p className="text-gray-300 dark:text-gray-400 text-xs font-medium">
-          {data.year} • {data.duration}
-        </p>
-      </div>
-    </div>
+      <h3
+        className={`font-bold text-white mb-1 mt-5 leading-tight ${
+          isActive ? "text-base" : "text-sm"
+        }`}
+      >
+        {data.title}
+      </h3>
+    </>
   );
 };
 

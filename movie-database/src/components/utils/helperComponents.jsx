@@ -48,6 +48,7 @@ export const PosterCard = ({ item, hasRating }) => (
         src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
         alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+        loading="lazy"
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 dark:group-hover:bg-black/40 transition" />
 
@@ -71,6 +72,7 @@ export const LandscapeCard = ({ item, isUpcoming }) => (
         src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
         alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+        loading="lazy"
       />
 
       {/* Gradient overlay at bottom */}
@@ -111,6 +113,7 @@ export const PersonCard = ({ item }) => (
         src={`https://image.tmdb.org/t/p/w500/${item?.profile_path}`}
         alt={item.name}
         className="w-full h-full object-cover"
+        loading="lazy"
       />
     </div>
     <span className="text-gray-600 dark:text-gray-400 text-xs text-center group-hover:text-gray-900 dark:group-hover:text-white transition-colors">

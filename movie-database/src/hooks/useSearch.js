@@ -18,7 +18,7 @@ const useSearch = ({ item, searchBy,page}) => {
         item => item.media_type === "movie" || item.media_type === "tv"
       );
     return ({
-        searchResult: filteredResults?.length!=0?filteredResults:searchResult1?.results,
+        searchResult: filteredResults?.length!==0?filteredResults:searchResult1?.results,
         searchLoading,
         searchError,
         searchCount:filteredResults?.length!==0? filteredResults?.length:searchResult1?.total_results        ,

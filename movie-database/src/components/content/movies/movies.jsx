@@ -200,6 +200,7 @@ const MovieDetails = () => {
                       e.target.src =
                         "https://via.placeholder.com/500x281?text=No+Logo";
                     }}
+                    loading="lazy"
                   />
 
                   {/* Light overlay for both modes - no dark gradients */}
