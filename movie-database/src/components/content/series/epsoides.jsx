@@ -2,9 +2,16 @@ import { Star } from "lucide-react";
 import useSeries from "../../../hooks/useSeries";
 import { FullDateDisplay } from "../../utils/dateFormater";
 import { Error } from "../../utils/Error";
+import { Loader } from "../../utils/Loader";
 export const EpisodeDisplay = ({ id, seasonNum }) => {
   const { seriesSeasonData, seriesSeasonError, seriesSeasonLoading } =
     useSeries(id, "series", seasonNum);
+  if (seriesSeasonLoading) {
+    return <Loader />;
+  }
+  if (seriesSeasonError) {
+    return <Error message="Episode Detail Information is Not Found" />;
+  }
   return (
     <div className="flex-1 p-6 md:p-12 bg-gray-50 dark:bg-[#0c0c0c]">
       <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase mb-10 tracking-wide">

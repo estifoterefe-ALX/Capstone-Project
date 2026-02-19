@@ -1,13 +1,14 @@
 import React from "react";
 import { ChevronDown, Star, Languages, Plus } from "lucide-react";
-import { EpisodeCard, MetadataBlock, EpisodeDisplay } from "./epsoides";
+import { MetadataBlock, EpisodeDisplay } from "./epsoides";
 import TopBar from "../TopBar";
 import { useParams } from "react-router-dom";
 import useSeries from "../../../hooks/useSeries";
 import { useState, useEffect } from "react";
 import { RoundToOneDecimal, FullDateDisplay } from "../../utils/dateFormater";
 import WatchTrailerButton from "../../utils/watchTrailer";
-
+import { Loader } from "../../utils/Loader";
+import { Error } from "../../utils/Error";
 function SeriesDetail() {
   const { id } = useParams();
   const { seriesDetailData, seriesDetailLoading, seriesDetailError } =
@@ -18,6 +19,12 @@ function SeriesDetail() {
       setSeason(seriesDetailData.seasons[0]);
     }
   }, [seriesDetailData]);
+  if (seriesDetailLoading) {
+    return <Loader />;
+  }
+  if (seriesDetailError) {
+    return <Error message="Series Detail Not Found" />;
+  }
   return (
     <div className="min-h-screen bg-white dark:bg-[#110f08] text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       {/* Top Header */}
