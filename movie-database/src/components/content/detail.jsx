@@ -18,6 +18,7 @@ import {
 import { FullScreenLoader } from "../utils/Loader";
 import { Link } from "react-router-dom";
 import { Error } from "../utils/Error";
+import { useRef } from "react";
 export default function Detail({
   items,
   error,
@@ -27,6 +28,20 @@ export default function Detail({
   type,
   id,
 }) {
+  const scrollRef = useRef(null);
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({
+      left: -400,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({
+      left: 400,
+      behavior: "smooth",
+    });
+  };
   if (loading) {
     return <FullScreenLoader />;
   }
@@ -248,15 +263,24 @@ export default function Detail({
             </h2>
           </div>
           <div className="flex gap-2">
-            <button className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+            <button
+              className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+              onClick={scrollLeft}
+            >
               <ChevronLeft size={16} />
             </button>
-            <button className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
+            <button
+              className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+              onClick={scrollRight}
+            >
               <ChevronRight size={16} />
             </button>
           </div>
         </div>
-        <div className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide">
+        <div
+          className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide"
+          ref={scrollRef}
+        >
           {recommendation?.list?.results ? (
             recommendation?.list?.results?.map((movie) => (
               <Link
