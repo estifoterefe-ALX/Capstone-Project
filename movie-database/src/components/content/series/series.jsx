@@ -159,17 +159,6 @@ function SeriesDetail() {
         </div>
 
         {/* Right Content: Episodes */}
-        {/* <div className="flex-1 p-6 md:p-12 bg-gray-50 dark:bg-[#0c0c0c]">
-          <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase mb-10 tracking-wide">
-            Episodes
-          </h2>
-
-          <div className="max-w-4xl">
-            {EPISODES.map((ep) => (
-              <EpisodeCard key={ep.id} ep={ep} />
-            ))}
-          </div>
-        </div> */}
         <EpisodeDisplay id={id} seasonNum={season?.season_number} />
       </div>
     </div>

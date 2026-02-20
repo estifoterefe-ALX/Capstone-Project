@@ -3,47 +3,48 @@ import { nowPlayingSeriesService, popularSeriesService, topRatedSeriesService, u
 
 const useSeries = (id, type,senid,page=1 ) => {
     const { data: upcomingSeriesData, isLoading: upcomingSeriesLoading, error: upcomingSeriesError } = useQuery({
-        queryKey: ["upcomingSeries"],
+        queryKey: ["upcomingSeries",page],
         queryFn:()=> upComingSeriesService(page),
         staleTime: 60 * 1000,
+        enabled:type==="series"
     })
     const { data: topRatedSeriesData, isLoading: topRatedSeriesLoading, error: topRatedSeriesError } = useQuery({
-        queryKey: ["topRatedSeries"],
+        queryKey: ["topRatedSeries",page],
         queryFn:()=> topRatedSeriesService(page),
         staleTime: 60 * 1000,
     })
     const { data: nowPlayingSeriesData, isLoading: nowPlayingSeriesLoading, error: nowPlayingSeriesError } = useQuery({
-        queryKey: ["nowPlayingSeries"],
+        queryKey: ["nowPlayingSeries",page],
         queryFn:()=> nowPlayingSeriesService(page),
         staleTime: 60 * 1000,
     })
     const { data: popularSeriesData, isLoading: popularSeriesLoading, error: popularSeriesError } = useQuery({
-        queryKey: ["popularSeries"],
+        queryKey: ["popularSeries",page],
         queryFn:()=> popularSeriesService(page),
         staleTime: 60 * 1000,
     })
     const { data: seriesDetailData, isLoading: seriesDetailLoading, error: seriesDetailError } = useQuery({
         queryKey: ["seriesDetail", id],
         queryFn: () => seriesDetailService(id),
-        enabled: type === "series",
+        enabled: type === "series" && !!id,
         staleTime: 10 * 60 * 1000,
     })
     const { data: seriesVideoData, isLoading: seriesVideoLoading, error: seriesVideoError } = useQuery({
         queryKey: ["seriesVideo", id],
         queryFn: () => seriesVideoService(id),
-        enabled: type === "series",
+        enabled: type === "series" && !!id,
         staleTime: 10 * 60 * 1000,
     })
     const { data: seriesRecommendationData, isLoading: seriesRecommendationLoading, error: seriesRecommendationError } = useQuery({
         queryKey: ["seriesRecommendation", id],
         queryFn: () => seriesRecommendationsService(id),
-        enabled: type === "series",
+        enabled: type === "series" && !!id,
         staleTime: 5 * 60 * 1000,
     })
     const { data: seriesPeopleData, isLoading: seriesPeopleLoading, error: seriesPeopleError } = useQuery({
         queryKey: ["seriesPeople", id],
         queryFn: () => seriesPeopleService(id),
-        enabled: type === "series",
+        enabled: type === "series" && !!id,
         staleTime: 5 * 60 * 1000,
     })
     const { data: seriesSeasonData, isLoading: seriesSeasonLoading, error: seriesSeasonError } = useQuery({

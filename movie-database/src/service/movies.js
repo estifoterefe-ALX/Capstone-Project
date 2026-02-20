@@ -1,10 +1,11 @@
 import landingApi from "./apis/landingApi";
 
-export const nowPlayingMoviesService = async () => {
+export const nowPlayingMoviesService = async (page) => {
     try {
         const response = await landingApi.get("/movie/now_playing",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -13,11 +14,12 @@ export const nowPlayingMoviesService = async () => {
         throw error
     }
 }
-export const popularMoviesService = async () => {
+export const popularMoviesService = async (page) => {
     try {
         const response = await landingApi.get("/movie/popular",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -26,11 +28,12 @@ export const popularMoviesService = async () => {
         throw error
     }
 }
-export const topRatedMoviesService = async () => {
+export const topRatedMoviesService = async (page) => {
     try {
         const response = await landingApi.get("/movie/top_rated",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data
@@ -39,11 +42,12 @@ export const topRatedMoviesService = async () => {
         throw error
     }
 }
-export const upComingMoviesService = async () => {
+export const upComingMoviesService = async (page) => {
     try {
         const response = await landingApi.get("/movie/upcoming",{
             params:{
-                language:"en-US"
+                language:"en-US",
+                page
             }
         })
         return response?.data

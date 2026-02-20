@@ -30,7 +30,7 @@ const SeriesSection = () => {
     popularSeriesData,
     popularSeriesError,
     popularSeriesLoading,
-  } = useSeries();
+  } = useSeries("", "series");
 
   return (
     <>
