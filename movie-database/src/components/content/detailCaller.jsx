@@ -4,10 +4,9 @@ import useSeries from "../../hooks/useSeries";
 import Detail from "./detail";
 
 function DetailCaller() {
-  const id = useParams();
+  const { id } = useParams();
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
-
   const {
     movieDetailData,
     movieDetailLoading,
@@ -16,7 +15,7 @@ function DetailCaller() {
     movieRecommendationLoading,
     movieRecommendationError,
     moviePeopleData,
-  } = useMovies(id.id, type);
+  } = useMovies(id, type);
   const {
     seriesDetailData,
     seriesDetailLoading,
@@ -25,7 +24,7 @@ function DetailCaller() {
     seriesRecommendationLoading,
     seriesRecommendationError,
     seriesPeopleData,
-  } = useSeries(id.id, type);
+  } = useSeries(id, type);
 
   const isMovie = type === "movie";
 

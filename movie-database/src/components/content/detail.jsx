@@ -254,7 +254,7 @@ export default function Detail({
 
       {/* Recommendations Section */}
       <div className="px-8 md:px-16 py-8 bg-gray-50 dark:bg-[#0b0d14]">
-        <div className="flex justify-between items-end mb-8">
+        <div className="flex flex-col xsm:flex-row justify-between items-end mb-8">
           <div>
             <p className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">
               Continue Exploring
@@ -282,7 +282,7 @@ export default function Detail({
           className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide"
           ref={scrollRef}
         >
-          {recommendation?.list?.results ? (
+          {recommendation?.list?.results.length !== 0 ? (
             recommendation?.list?.results?.map((movie) => (
               <Link
                 key={movie.id}
