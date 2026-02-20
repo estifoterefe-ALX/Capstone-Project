@@ -52,7 +52,7 @@ const SeriesSection = () => {
             type={"series"}
           />
         </section>
-        <section id="toRatedS">
+        <section id="topRatedS">
           <NormalHeader
             title={"top rated"}
             hasViewAll={true}
