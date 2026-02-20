@@ -64,7 +64,7 @@ export const EpisodeCard = ({ ep }) => (
           {ep.name}
         </h3>
 
-        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2 mb-3">
+        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3 max-h-24 overflow-y-auto no-scrollbar">
           {ep.overview}
         </p>
 
