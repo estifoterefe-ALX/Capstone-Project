@@ -257,7 +257,7 @@ export default function Detail({
           </div>
         </div>
         <div className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide">
-          {!recommendation?.list?.results ? (
+          {recommendation?.list?.results ? (
             recommendation?.list?.results?.map((movie) => (
               <Link
                 key={movie.id}
