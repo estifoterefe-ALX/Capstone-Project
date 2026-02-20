@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import useSeries from "../../../hooks/useSeries";
-import { FullDateDisplay } from "../../utils/dateFormater";
+import { FullDateDisplay } from "../../utils/DataFormater";
 import { Error } from "../../utils/Error";
 import { Loader } from "../../utils/Loader";
 export const EpisodeDisplay = ({ id, seasonNum }) => {

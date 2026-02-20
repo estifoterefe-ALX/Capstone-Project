@@ -13,7 +13,7 @@ import { useState } from "react";
 import useSearch from "../../../hooks/useSearch";
 import { Loader } from "../../utils/Loader";
 import { Error } from "../../utils/Error";
-import { YearDisplay, RoundToOneDecimal } from "../../utils/dateFormater";
+import { YearDisplay, RoundToOneDecimal } from "../../utils/DataFormater";
 import { Link } from "react-router-dom";
 import Pagination from "../../utils/pagination";
 

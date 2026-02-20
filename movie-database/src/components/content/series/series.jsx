@@ -5,7 +5,7 @@ import TopBar from "../TopBar";
 import { useParams } from "react-router-dom";
 import useSeries from "../../../hooks/useSeries";
 import { useState, useEffect } from "react";
-import { RoundToOneDecimal, FullDateDisplay } from "../../utils/dateFormater";
+import { RoundToOneDecimal, FullDateDisplay } from "../../utils/DataFormater";
 import WatchTrailerButton from "../../utils/watchTrailer";
 import { Loader } from "../../utils/Loader";
 import { Error } from "../../utils/Error";
