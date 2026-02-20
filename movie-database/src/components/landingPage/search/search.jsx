@@ -150,7 +150,7 @@ function SearchPage() {
         </>
       )}
       {searchResult && (
-        <Pagination page={page} setPage={setPage} count={searchCount} />
+        <Pagination page={page} setPage={setPage} count={searchCount / 10} />
       )}
     </div>
   );
