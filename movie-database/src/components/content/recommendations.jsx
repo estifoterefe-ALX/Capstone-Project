@@ -15,7 +15,7 @@ export const RecommendationCard = ({ item }) => (
       </div>
     </div>
     <h3 className="text-gray-900 dark:text-white font-bold text-sm leading-tight group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-      {item?.name}
+      {item?.name || item?.title}
     </h3>
     <p className="text-gray-600 dark:text-gray-500 text-xs uppercase tracking-wide mt-1 group-hover:text-yellow-600 dark:group-hover:text-yellow-400">
       {item.first_air_date

@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, StarHalf } from "lucide-react";
 import useSeries from "../../../hooks/useSeries";
 import { FullDateDisplay } from "../../utils/DataFormater";
 import { Error } from "../../utils/Error";
@@ -71,17 +71,23 @@ export const EpisodeCard = ({ ep }) => (
         {/* Rating Stars */}
         <div className="flex items-center gap-2">
           <div className="flex items-center">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) => (
-              <Star
-                className={`w-4 h-4 ${
-                  star <= Math.floor(ep.vote_average)
-                    ? "text-yellow-400"
-                    : star - ep.vote_average < 1 && star - ep.vote_average > 0
-                      ? "text-yellow-400/50" // Half star effect
-                      : "text-gray-300 dark:text-gray-600"
-                }`}
-              />
-            ))}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((star) =>
+              star <= Math.floor(ep.vote_average) ? (
+                <Star
+                  className={
+                    "w-4 h-4 fill-yellow-600 text-yellow-600 dark:fill-yellow-400 dark:text-yellow-400"
+                  }
+                />
+              ) : star - ep.vote_average < 1 && star - ep.vote_average > 0 ? (
+                <StarHalf
+                  className={
+                    "w-4 h-4 fill-yellow-600 text-yellow-600 dark:fill-yellow-400 dark:text-yellow-400"
+                  }
+                />
+              ) : (
+                <Star className={"w-4 h-4 text-gray-300 dark:text-gray-600"} />
+              ),
+            )}
           </div>
           <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
             {ep.vote_average.toFixed(1)} / 10.0

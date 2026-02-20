@@ -132,10 +132,10 @@ function SeriesDetail() {
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-200 dark:border-white/10">
               <div>
                 <h4 className="text-gray-600 dark:text-gray-500 text-[9px] font-bold uppercase tracking-widest mb-1">
-                  Duration
+                  Avg.Duration
                 </h4>
                 <div className="text-gray-900 dark:text-white text-xs font-bold">
-                  {seriesDetailData?.episode_run_time[0]}
+                  {seriesDetailData?.episode_run_time[0]}min/per epsoide
                 </div>
               </div>
               <div>

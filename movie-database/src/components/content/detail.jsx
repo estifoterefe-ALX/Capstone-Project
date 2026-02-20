@@ -14,6 +14,7 @@ import {
   FullDateDisplay,
   YearDisplay,
   FormatNumberWithComma,
+  RoundToOneDecimal,
 } from "../utils/DataFormater";
 import { FullScreenLoader } from "../utils/Loader";
 import { Link } from "react-router-dom";
@@ -78,8 +79,8 @@ export default function Detail({
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black italic tracking-tighter text-gray-900 dark:text-white mb-4 uppercase">
-            {items?.title}
+          <h1 className="text-3xl md:text-6xl font-black italic tracking-tighter text-gray-900 dark:text-white mb-4 uppercase">
+            {items?.title || items?.name}
           </h1>
 
           <div className="flex items-center gap-6 text-sm font-medium text-gray-900 dark:text-gray-300 mb-6">
@@ -90,7 +91,7 @@ export default function Detail({
             </span>
             <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full" />
             <span className="border border-gray-400 dark:border-gray-900 px-1 rounded text-xs">
-              {items?.popularity}
+              {RoundToOneDecimal(items?.popularity)}
             </span>
             <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
             <span>
