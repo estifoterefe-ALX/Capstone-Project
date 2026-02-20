@@ -47,11 +47,9 @@ const Header = ({ isLoggedIn = false }) => {
             return (
               <span
                 key={item.id}
-                className={`${
-                  activeTab === item.id
-                    ? "text-gray-900 dark:text-gray-100 border-b-3 border-yellow-500 dark:border-yellow-400 pb-1 cursor-pointer"
-                    : "transition cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
-                }`}
+                className={
+                  "transition cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+                }
                 onClick={() => handleClick(item.id)}
               >
                 {item.name}
