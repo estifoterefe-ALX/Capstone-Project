@@ -8,7 +8,7 @@ import {
   FormatNumberWithComma,
   FormatMinutesToTime,
   RoundToOneDecimal,
-} from "../../utils/dateFormater";
+} from "../../utils/DataFormater";
 import { FullScreenLoader } from "../../utils/Loader";
 import { FullScreenError } from "../../utils/Error";
 import WatchTrailerButton from "../../utils/watchTrailer";

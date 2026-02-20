@@ -1,4 +1,4 @@
-import { YearDisplay } from "../utils/dateFormater";
+import { YearDisplay } from "../utils/DataFormater";
 export const RecommendationCard = ({ item }) => (
   <div className="group cursor-pointer min-w-[150px] md:min-w-[180px]">
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700">

@@ -14,7 +14,7 @@ import {
   FullDateDisplay,
   YearDisplay,
   FormatNumberWithComma,
-} from "../utils/dateFormater";
+} from "../utils/DataFormater";
 import { FullScreenLoader } from "../utils/Loader";
 import { Link } from "react-router-dom";
 import { Error } from "../utils/Error";

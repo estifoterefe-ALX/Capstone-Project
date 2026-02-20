@@ -1,5 +1,5 @@
 import { Play, ChevronRight } from "lucide-react";
-import { dateFormater } from "./dateFormater";
+import { dateFormater } from "./DataFormater";
 import { Link } from "react-router-dom";
 export const SectionHeader = ({
   title,
