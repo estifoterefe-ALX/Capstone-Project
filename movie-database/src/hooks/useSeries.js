@@ -82,22 +82,26 @@ const useSeries = (id, type,senid,page=1 ) => {
         popularSeries:{
             data:popularSeriesData?.results,
             loading:popularSeriesLoading,
-            error:popularSeriesError
+            error:popularSeriesError,
+            count:popularSeriesData?.total_results
         },
         topRatedSeries:{
             data:topRatedSeriesData?.results,
             loading:topRatedSeriesLoading,
-            error:topRatedSeriesError
+            error:topRatedSeriesError,
+            count:topRatedSeriesData?.total_results
         },
         nowPlayingSeries:{
             data:nowPlayingSeriesData?.results,
             loading:nowPlayingSeriesLoading,
-            error:nowPlayingSeriesError
+            error:nowPlayingSeriesError,
+            count:nowPlayingSeriesData?.total_results
         },
         upcomingSeries:{
             data:upcomingSeriesData?.results,
             loading:upcomingSeriesLoading,
-            error:upcomingSeriesError
+            error:upcomingSeriesError,
+            count:upcomingSeriesData?.total_results
         }
     })
 }

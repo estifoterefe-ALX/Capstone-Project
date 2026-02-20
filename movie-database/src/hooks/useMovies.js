@@ -73,22 +73,26 @@ const useMovies = (id, type,page=1) => {
         popularMovies:{
             data:popularMoviesData?.results,
             loading:popularMoviesLoading,
-            error:popularMoviesError
+            error:popularMoviesError,
+            count:popularMoviesData?.total_results
         },
         topRatedMovies:{
             data:topRatedMoviesData?.results,
             loading:topRatedMoviesLoading,
-            error:topRatedMoviesError
+            error:topRatedMoviesError,
+            count:topRatedMoviesData?.total_results
         },
         nowPlayingMovies:{
             data:nowPlayingMoviesData?.results,
             loading:nowPlayingMoviesLoading,
-            error:nowPlayingMoviesError
+            error:nowPlayingMoviesError,
+            count:nowPlayingMoviesData?.total_results
         },
         upcomingMovies:{
             data:upcomingMoviesData?.results,
             loading:upcomingMoviesLoading,
-            error:upcomingMoviesError
+            error:upcomingMoviesError,
+            count:upcomingMoviesData?.total_results
         }
 
     })

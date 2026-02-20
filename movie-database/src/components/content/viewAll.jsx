@@ -40,7 +40,7 @@ function ViewAll() {
         {/* Pagination centered */}
 
         <div className="flex justify-center pb-12 px-8 md:px-16">
-          <Pagination page={page} setPage={setPage} count={count} />
+          <Pagination page={page} setPage={setPage} count={count / 10} />
         </div>
       </div>
     </div>

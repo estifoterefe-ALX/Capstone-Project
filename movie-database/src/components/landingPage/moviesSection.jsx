@@ -41,7 +41,7 @@ const MoviesSection = () => {
           <NormalHeader
             title={"NOW PLAYING"}
             hasViewAll={true}
-            onViewAll={() => navigate("/viewAll/nowPlaying")}
+            onViewAll={() => navigate("/viewAll/nowPlayingMovies")}
           />
           <MediaRow
             data={nowPlayingMoviesData}
