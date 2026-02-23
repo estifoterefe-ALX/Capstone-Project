@@ -33,18 +33,62 @@ function SeriesDetail() {
           <TopBar />
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tighter uppercase mb-2">
-          {seriesDetailData?.name}
-        </h1>
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4">
-          {/* Watch Trailer Button */}
-          <WatchTrailerButton id={seriesDetailData?.id} type={"series"} />
+        <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] rounded-3xl overflow-hidden shadow-2xl dark:shadow-none border border-gray-200 dark:border-gray-800 mb-8 sm:mb-12 group">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <picture>
+              <source
+                media="(min-width: 768px)"
+                srcSet={`https://image.tmdb.org/t/p/original/${seriesDetailData?.backdrop_path}`}
+              />
+              <img
+                src={`https://image.tmdb.org/t/p/original/${seriesDetailData?.poster_path}`}
+                alt={seriesDetailData?.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </picture>
+            {/* Gradient Overlay for Fade Effect */}
+            <div className="absolute inset-0 bg-linear-to-t from-gray-100/30 via-transparent to-transparent dark:from-[#0c0c0c] dark:via-[#0c0c0c]/40 dark:to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-gray-100/20 via-transparent to-transparent dark:from-[#0c0c0c]/90 dark:via-[#0c0c0c]/30 dark:to-transparent" />
+          </div>
 
-          {/* Add to List Button */}
-          <button className="flex items-center gap-2 px-6 py-3 bg-gray-200 dark:bg-[#252525] hover:bg-gray-300 dark:hover:bg-[#333333] text-gray-900 dark:text-white font-medium rounded-lg transition-all duration-200 hover:scale-105 border border-gray-300 dark:border-white/10">
-            <Plus size={20} /> My List
-          </button>
+          {/* Hero Content Layer */}
+          <div className="relative z-10 h-full flex items-end md:items-center p-4 sm:p-6 md:p-8 lg:p-12 gap-4 sm:gap-6 md:gap-10">
+            {/* Poster Card - Hidden on mobile, visible on desktop */}
+            <div className="hidden md:block w-32 lg:w-40 xl:w-48 h-48 lg:h-56 xl:h-64 shrink-0 rounded-lg overflow-hidden border-4 border-gray-300 dark:border-gray-800/50 shadow-2xl relative transform translate-y-4 md:translate-y-6 lg:translate-y-8">
+              <img
+                src={`https://image.tmdb.org/t/p/original/${seriesDetailData?.poster_path}`}
+                alt={seriesDetailData?.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Text Content */}
+            <div className="flex flex-col items-start pb-2 sm:pb-3 md:pb-4">
+              <div className="flex items-center gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
+                <span className="bg-yellow-500 dark:bg-yellow-400 text-black text-[8px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase">
+                  Ultra HD
+                </span>
+                <div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 text-xs sm:text-sm font-bold">
+                  <Star size={12} sm:size={14} fill="currentColor" />
+                  <span>{seriesDetailData?.vote_average} Rating</span>
+                </div>
+              </div>
+
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 md:mb-8 tracking-tight line-clamp-2">
+                {seriesDetailData?.title || seriesDetailData?.name}
+              </h1>
+
+              <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
+                <WatchTrailerButton id={seriesDetailData?.id} type={"series"} />
+                <button className="bg-black/10 hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-md text-gray-800 dark:text-white px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-xl font-bold flex items-center gap-1 sm:gap-2 transition-all border border-gray-300 dark:border-white/10 text-sm sm:text-base">
+                  <Plus size={16} sm:size={20} /> My List
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -69,12 +69,6 @@ const MovieDetails = () => {
               className="w-full h-full object-cover"
               loading="lazy"
             />
-            {/* Poster Overlay Text imitating the design */}
-            <div className="absolute bottom-0 w-full p-4 text-center bg-linear-to-t from-black/90 to-transparent">
-              <h3 className="text-yellow-500 font-serif text-xl tracking-widest">
-                {movieDetailData?.tagline}
-              </h3>
-            </div>
           </div>
 
           {/* Text Content */}
