@@ -50,12 +50,22 @@ const Trending = () => {
           }`}
         >
           {/* Background Image */}
-          <img
+          {/* <img
             src={`https://image.tmdb.org/t/p/w500/${slide?.backdrop_path}`}
             alt={slide.title}
             className="w-full h-full object-cover"
             loading="lazy"
-          />
+          /> */}
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet={`https://image.tmdb.org/t/p/original/${slide?.backdrop_path}`}
+            />
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${slide?.poster_path}`}
+              className="w-full h-full object-cover"
+            />
+          </picture>
 
           {/* Gradient Overlay - Updated for light/dark */}
           <div className="absolute inset-0 bg-linear-to-t from-gray-100/80 via-gray-50/20 to-transparent dark:from-[#0a0f1c] dark:via-[#0a0f1c]/40 dark:to-transparent" />

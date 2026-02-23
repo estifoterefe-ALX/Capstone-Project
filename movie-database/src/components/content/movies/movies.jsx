@@ -38,12 +38,22 @@ const MovieDetails = () => {
       <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl dark:shadow-none border border-gray-200 dark:border-gray-800 mb-12 group">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          {/* <img
             src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.backdrop_path}`}
             alt={movieDetailData?.name}
             className="w-full h-full object-cover opacity-60 dark:opacity-60"
             loading="lazy"
-          />
+          /> */}
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet={`https://image.tmdb.org/t/p/original/${movieDetailData?.backdrop_path}`}
+            />
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.poster_path}`}
+              className="w-full h-full object-cover"
+            />
+          </picture>
           {/* Gradient Overlay for Fade Effect */}
           <div className="absolute inset-0 bg-linear-to-t from-gray-100/30 via-transparent to-transparent dark:from-[#0c0c0c] dark:via-[#0c0c0c]/40 dark:to-transparent" />
           <div className="absolute inset-0 bg-linear-to-r from-gray-100/20 via-transparent to-transparent dark:from-[#0c0c0c]/90 dark:via-[#0c0c0c]/30 dark:to-transparent" />
