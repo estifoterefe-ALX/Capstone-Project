@@ -12,7 +12,6 @@ export const EpisodeDisplay = ({ id, seasonNum }) => {
   if (seriesSeasonError) {
     return <Error message="Episode Detail Information is Not Found" />;
   }
-  console.log(seriesSeasonData);
   return (
     <div className="flex-1 p-6 md:p-12 bg-gray-50 dark:bg-[#0c0c0c]">
       <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase mb-10 tracking-wide">
