@@ -57,12 +57,22 @@ export default function Detail({
       <div className="relative w-full h-screen md:h-[85vh]">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
+          {/* <img
             src={`https://image.tmdb.org/t/p/w500/${items?.backdrop_path}`}
             alt="Background"
             className="w-full h-full object-cover"
             loading="lazy"
-          />
+          /> */}
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet={`https://image.tmdb.org/t/p/original/${items?.backdrop_path}`}
+            />
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${items?.poster_path}`}
+              className="w-full h-full object-cover"
+            />
+          </picture>
           {/* Complex Gradient to fade into body color */}
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-white/30 dark:from-[#0b0d14]/30 dark:via-[#0b0d14]/60 dark:to-[#0b0d14]" />
           <div className="absolute inset-0 bg-linear-to-r from-white/20 via-transparent to-transparent dark:from-[#0b0d14]/90 dark:via-[#0b0d14]/40 dark:to-transparent" />
