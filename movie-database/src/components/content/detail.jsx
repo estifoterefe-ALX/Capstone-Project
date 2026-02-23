@@ -264,7 +264,7 @@ export default function Detail({
 
       {/* Recommendations Section */}
       <div className="px-8 md:px-16 py-8 bg-gray-50 dark:bg-[#0b0d14]">
-        <div className="flex flex-col xsm:flex-row justify-between items-end mb-8">
+        <div className="flex sm:flex-row justify-between flex-col mb-8">
           <div>
             <p className="text-yellow-500 dark:text-yellow-400 text-xs font-bold uppercase tracking-wider mb-2">
               Continue Exploring
@@ -275,13 +275,13 @@ export default function Detail({
           </div>
           <div className="flex gap-2">
             <button
-              className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
               onClick={scrollLeft}
             >
               <ChevronLeft size={16} />
             </button>
             <button
-              className="p-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
               onClick={scrollRight}
             >
               <ChevronRight size={16} />
