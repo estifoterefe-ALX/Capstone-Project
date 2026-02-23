@@ -141,7 +141,7 @@ function SearchPage() {
                     rating: RoundToOneDecimal(item.vote_average),
                     duration: "",
                     type: item.media_type || submittedQuery.searchBy,
-                    img: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
+                    img: `https://image.tmdb.org/t/p/original/${item?.poster_path}`,
                   }}
                 />
               </Link>

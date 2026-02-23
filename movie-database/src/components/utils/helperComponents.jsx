@@ -56,7 +56,7 @@ export const PosterCard = ({ item, hasRating }) => (
   <div className="flex-none w-[160px] group cursor-pointer">
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md dark:shadow-gray-900/30">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
+        src={`https://image.tmdb.org/t/p/original/${item?.poster_path}`}
         alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
         loading="lazy"
@@ -79,7 +79,7 @@ export const ViewAllPoster = ({ item, hasRating }) => (
   <div className="w-full group cursor-pointer">
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md dark:shadow-gray-900/30">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
+        src={`https://image.tmdb.org/t/p/original/${item?.poster_path}`}
         alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
         loading="lazy"
@@ -103,7 +103,7 @@ export const LandscapeCard = ({ item, isUpcoming }) => (
   <div className="flex-none w-[240px] group cursor-pointer">
     <div className="relative aspect-video overflow-hidden rounded-lg shadow-md dark:shadow-gray-900/30">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/original/${item?.backdrop_path}`}
         alt={item.title || item.name}
         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
         loading="lazy"
@@ -144,7 +144,7 @@ export const PersonCard = ({ item }) => (
   <div className="flex-none w-[100px] flex flex-col items-center group cursor-pointer">
     <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-700 group-hover:border-yellow-500 dark:group-hover:border-yellow-400 transition mb-2 shadow-md">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${item?.profile_path}`}
+        src={`https://image.tmdb.org/t/p/original/${item?.profile_path}`}
         alt={item.name}
         className="w-full h-full object-cover"
         loading="lazy"

@@ -39,7 +39,7 @@ const MovieDetails = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           {/* <img
-            src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original/${movieDetailData?.backdrop_path}`}
             alt={movieDetailData?.name}
             className="w-full h-full object-cover opacity-60 dark:opacity-60"
             loading="lazy"
@@ -50,7 +50,7 @@ const MovieDetails = () => {
               srcSet={`https://image.tmdb.org/t/p/original/${movieDetailData?.backdrop_path}`}
             />
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original/${movieDetailData?.poster_path}`}
               className="w-full h-full object-cover"
             />
           </picture>
@@ -64,7 +64,7 @@ const MovieDetails = () => {
           {/* Poster Card - Hidden on mobile, visible on desktop */}
           <div className="hidden md:block w-64 h-96 shrink-0 rounded-lg overflow-hidden border-4 border-gray-300 dark:border-gray-800/50 shadow-2xl relative transform translate-y-8">
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movieDetailData?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original/${movieDetailData?.poster_path}`}
               alt={movieDetailData?.name}
               className="w-full h-full object-cover"
               loading="lazy"
@@ -203,7 +203,7 @@ const MovieDetails = () => {
                 >
                   {/* Image - clearly visible */}
                   <img
-                    src={`https://image.tmdb.org/t/p/w500/${company?.logo_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${company?.logo_path}`}
                     alt={company.name}
                     className="w-full h-full object-contain p-6"
                     onError={(e) => {

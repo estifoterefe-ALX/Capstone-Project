@@ -58,7 +58,7 @@ export default function Detail({
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           {/* <img
-            src={`https://image.tmdb.org/t/p/w500/${items?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original/${items?.backdrop_path}`}
             alt="Background"
             className="w-full h-full object-cover"
             loading="lazy"
@@ -69,7 +69,7 @@ export default function Detail({
               srcSet={`https://image.tmdb.org/t/p/original/${items?.backdrop_path}`}
             />
             <img
-              src={`https://image.tmdb.org/t/p/w500/${items?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original/${items?.poster_path}`}
               className="w-full h-full object-cover"
             />
           </picture>
@@ -205,7 +205,7 @@ export default function Detail({
                 {credits?.cast?.slice(0, 5).map((cast, i) => (
                   <div key={i} className="relative group/cast">
                     <img
-                      src={`https://image.tmdb.org/t/p/w500/${cast?.profile_path}`}
+                      src={`https://image.tmdb.org/t/p/original/${cast?.profile_path}`}
                       className="w-12 h-12 rounded-full border-2 border-white dark:border-[#0b0d14] 
     group-hover/cast:scale-120 group-hover/cast:z-20 group-hover/cast:border-yellow-500 
     dark:group-hover/cast:border-yellow-400 transition-all duration-300 

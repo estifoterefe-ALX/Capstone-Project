@@ -51,7 +51,7 @@ const Trending = () => {
         >
           {/* Background Image */}
           {/* <img
-            src={`https://image.tmdb.org/t/p/w500/${slide?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original/${slide?.backdrop_path}`}
             alt={slide.title}
             className="w-full h-full object-cover"
             loading="lazy"
@@ -62,7 +62,7 @@ const Trending = () => {
               srcSet={`https://image.tmdb.org/t/p/original/${slide?.backdrop_path}`}
             />
             <img
-              src={`https://image.tmdb.org/t/p/w500/${slide?.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original/${slide?.poster_path}`}
               className="w-full h-full object-cover"
             />
           </picture>

@@ -12,6 +12,7 @@ export const EpisodeDisplay = ({ id, seasonNum }) => {
   if (seriesSeasonError) {
     return <Error message="Episode Detail Information is Not Found" />;
   }
+  console.log(seriesSeasonData);
   return (
     <div className="flex-1 p-6 md:p-12 bg-gray-50 dark:bg-[#0c0c0c]">
       <h2 className="text-2xl font-black text-gray-900 dark:text-white uppercase mb-10 tracking-wide">
@@ -36,7 +37,7 @@ export const EpisodeCard = ({ ep }) => (
     <div className="relative w-full md:w-64 h-36 shrink-0">
       <div className="w-full h-full rounded-lg overflow-hidden border border-gray-300 dark:border-white/5 shadow-sm">
         <img
-          src={`https://image.tmdb.org/t/p/w500/${ep?.still_path}`}
+          src={`https://image.tmdb.org/t/p/original/${ep?.still_path}`}
           alt={ep.name}
           className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
         />

@@ -3,7 +3,7 @@ export const RecommendationCard = ({ item }) => (
   <div className="group cursor-pointer min-w-[150px] md:min-w-[180px]">
     <div className="relative aspect-2/3 overflow-hidden rounded-lg mb-3 shadow-md bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700">
       <img
-        src={`https://image.tmdb.org/t/p/w500/${item?.poster_path}`}
+        src={`https://image.tmdb.org/t/p/original/${item?.poster_path}`}
         alt={item?.name}
         className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90 dark:opacity-80 group-hover:opacity-100"
         loading="lazy"
