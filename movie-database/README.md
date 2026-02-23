@@ -1,278 +1,202 @@
-# Movie Database - Capstone Project
+## Movie Database – Capstone Project
 
-A modern, responsive movie and TV series database application built with React and Vite. This project integrates with The Movie Database (TMDB) API to provide users with comprehensive information about movies, TV series, and trending content.
+**Movie Database** is a modern, responsive web application that lets users explore movies, TV series, people, and trending content using data from **The Movie Database (TMDB)**.  
+It is built as a full front‑end capstone project to demonstrate **React**, **Vite**, **TailwindCSS**, and modern state‑management and data‑fetching patterns.
 
-## 🚀 Features
+### 🎬 What the app does
 
-### ✅ Implemented Features
+- **Discover trending content**
+  - Full‑screen hero carousel highlighting trending movies and series (auto‑rotating, with rich metadata).
+  - Daily **Trending Movies**, **Trending Series**, and **Trending People** sections.
+- **Browse catalogs**
+  - Dedicated **Movies** and **Series** sections on the landing page.
+  - Catalog cards show posters, title, rating, release year, and key metadata.
+- **View rich details**
+  - **Movie details** page with:
+    - Large hero banner, poster, and tagline.
+    - Full overview/synopsis.
+    - Release date, runtime, budget, revenue, ratings, genres, languages, countries.
+    - Production companies with logos.
+    - “Watch trailer” entry point.
+  - **Series details** page with:
+    - Seasons and episodes (episode card list with title, number, air date, runtime, overview, and thumbnail).
+    - Series metadata (rating, genres, language, content stats).
+    - Recommendations and related content.
+- **Search experience**
+  - Dedicated search page with:
+    - Search bar component.
+    - Results grid/card layout.
+    - Pagination and planned filtering/sorting (popularity, etc.).
+- **User‑friendly interactions**
+  - Buttons for “Add to Favorites”, “Add to Watchlist”, and “More Info”/“View Detail”.
+  - Smooth scrolling sections and carousels for recommendations and production companies.
 
-#### **Landing Page**
+### 🌓 UX & design
 
-- **Hero Section**: Trending content carousel with featured movies/series
-- **Trending Movies Section**: Displays daily trending movies
-- **Trending Series Section**: Shows trending TV series
-- **Trending People Section**: Highlights popular actors and directors
-- **Movies Section**: Browse and explore movie catalog
-- **Series Section**: Browse and explore TV series catalog
-- **Header Navigation**: Smooth navigation with anchor links
-- **Footer**: Site information and links
+- **Modern, cinematic UI** with focus on big imagery and bold typography.
+- **Dark mode support**:
+  - Animated theme toggle component.
+  - Theme preference persisted to `localStorage`.
+  - Carefully tuned light/dark gradients on hero sections so text stays readable.
+- **Mobile‑first, responsive layout**:
+  - Works across phones, tablets, and large desktop screens.
+  - Scrollbars visually hidden in carousels for a cleaner look.
+- **Accessibility‑minded structure**:
+  - Semantic sections, ARIA‑friendly controls, and clear focus on contrast.
 
-#### **Search Functionality**
+### 🧩 Architecture overview
 
-- **Search Bar**: Real-time search interface
-- **Search Results Page**: Grid layout displaying search results
-- **Pagination**: Navigate through multiple pages of results
-- **Filtering & Sorting**: Sort results by popularity and other criteria
-- **Result Cards**: Display movies and series with ratings, duration, and metadata
+- **Routing & pages**
+  - `/` – landing page with hero, trending sections, and catalogs.
+  - `/movies` – movies listing context.
+  - `/series` – series listing context.
+  - `/detail/:id` – generic detail wrapper used together with type to show movie/series detail.
+  - `/search` – search results page.
+- **Core components (examples)**
+  - `landingPage/landingPage.jsx` – main landing layout; stitches together header, hero, trending, and catalog sections.
+  - `landingPage/trending.jsx` – hero carousel that consumes trending “all” data and auto‑rotates slides.
+  - `items/detail.jsx` – shared high‑end detail layout (hero, metadata, description, credits avatars, recommendations slider).
+  - `items/movies/movies.jsx` – movie‑specific detail implementation (extra metadata such as budget, revenue, runtime, etc.).
+  - `items/series/epsoides.jsx` – episode cards for series seasons.
+- **State management**
+  - **Zustand** stores:
+    - `authStore.js` – holds authentication‑related state (planned for future login/favorites).
+    - `currentDetailStore.js` – manages the currently selected detail item/type for smooth navigation.
+  - **TanStack Query (React Query)** for server state:
+    - Handles loading, caching, and refetching of TMDB data.
+    - Central place for API loading/error states (`Loader`, `Error`, `FullScreenLoader`, `FullScreenError` components).
+- **Data fetching / services**
+  - `hooks/useTrending.js` – hook to fetch and normalize trending data for the landing hero and sections.
+  - `service/apis/landingApi.js` – Axios client configuration (base URL, headers, API key).
+  - `service/landingPage.js` – higher‑level functions that map TMDB endpoints into UI‑friendly data.
+- **Utilities & formatting**
+  - `utils/DataFormater` – helpers like:
+    - `FullDateDisplay` – converts `YYYY-MM-DD` to human‑readable dates.
+    - `YearDisplay` – extracts year from dates.
+    - `FormatNumberWithComma` – currency and big numbers (budget, revenue).
+    - `FormatMinutesToTime` – converts minutes to `Hh Mm` style.
+    - `RoundToOneDecimal` – user‑friendly rating display.
+  - **UI helpers** such as `WatchTrailerButton`, `Loader`, `Error`, and recommendation cards.
 
-#### **Movie Details Page**
+### 🛠️ Tech stack
 
-- **Hero Section**: Large background image with movie information overlay
-- **Metadata Display**: Release date, runtime, rating, budget, genres
-- **Description**: Full synopsis and plot details
-- **Recommendations**: Similar movies/series suggestions
-- **Action Buttons**: Add to favorites, watchlist, and view details
-- **Production Companies**: Display production studio information
+- **Core**
+  - **React** – component‑based UI.
+  - **Vite** – dev server and bundler.
+  - **React Router DOM** – client‑side routing.
+- **Styling**
+  - **TailwindCSS** for utility‑first styling and responsive design.
+  - Custom dark theme with gradients and overlays tailored for movie posters.
+- **State & data**
+  - **Zustand** for app/global UI state.
+  - **TanStack Query (React Query)** for async data and caching.
+  - **Axios** as the HTTP client.
+- **Icons & visuals**
+  - **Lucide React** for crisp UI icons (play, info, chevrons, etc.).
+  - TMDB image CDN for backdrops, posters, logos, and people photos.
 
-#### **Series Details Page**
+### 📁 Project structure (high level)
 
-- **Season Selector**: Dropdown to switch between seasons
-- **Episode List**: Detailed episode cards with:
-  - Episode number and title
-  - Release date
-  - Duration
-  - Description
-  - Progress tracking (watched/unwatched)
-  - Episode thumbnails
-- **Series Metadata**: Release date, rating, language, genres, certificate
-- **Statistics**: Duration, total episodes, content rating
-
-#### **Dark Mode**
-
-- **Theme Toggle**: Beautiful animated toggle switch
-- **Persistent Theme**: Saves user preference in localStorage
-- **Smooth Transitions**: Seamless theme switching with animations
-- **Custom Dark Theme**: Optimized color scheme for dark mode
-
-#### **State Management**
-
-- **Zustand Store**: Global state management for:
-  - Authentication state (`authStore.js`)
-  - Current detail view (`currentDetailStore.js`)
-- **React Query**: Server state management and caching
-- **Custom Hooks**: Reusable data fetching hooks (`useTrending.js`)
-
-#### **API Integration**
-
-- **TMDB API**: Integration with The Movie Database API
-- **Axios Configuration**: Centralized API client setup
-- **Service Layer**: Organized API service functions
-- **Error Handling**: Comprehensive error handling for API calls
-
-## 🛠️ Tech Stack
-
-### Core Technologies
-
-- **React 19.2.0**: Modern React with latest features
-- **Vite 7.2.4**: Fast build tool and dev server
-- **React Router DOM 7.13.0**: Client-side routing
-
-### Styling
-
-- **TailwindCSS 4.1.18**: Utility-first CSS framework
-- **Custom Theme**: Dark mode support with custom color palette
-- **Responsive Design**: Mobile-first approach
-
-### State Management & Data Fetching
-
-- **Zustand 5.0.11**: Lightweight state management
-- **TanStack Query 5.90.20**: Powerful data synchronization
-- **Axios 1.13.5**: HTTP client for API requests
-
-### UI Components & Icons
-
-- **Lucide React 0.563.0**: Beautiful icon library
-
-## 📁 Project Structure
-
-```
+```text
 movie-database/
 ├── src/
 │   ├── components/
-│   │   ├── items/
-│   │   │   ├── detail.jsx          # Movie/Series detail page
-│   │   │   ├── metaData.jsx        # Metadata display component
-│   │   │   ├── recommendations.jsx # Recommendations carousel
-│   │   │   ├── TopBar.jsx          # Top navigation bar
+│   │   ├── items/                 # Detail layouts and shared content components
+│   │   │   ├── detail.jsx
+│   │   │   ├── metaData.jsx
+│   │   │   ├── recommendations.jsx
+│   │   │   ├── TopBar.jsx
 │   │   │   ├── movies/
-│   │   │   │   └── movies.jsx      # Movies listing page
+│   │   │   │   └── movies.jsx
 │   │   │   └── series/
-│   │   │       ├── series.jsx      # Series listing page
-│   │   │       └── epsoides.jsx   # Episode cards component
-│   │   └── landingPage/
-│   │       ├── landingPage.jsx     # Main landing page
-│   │       ├── header.jsx         # Site header
-│   │       ├── footer.jsx         # Site footer
-│   │       ├── themeToggle.jsx    # Dark mode toggle
-│   │       ├── trending.jsx       # Trending carousel
-│   │       ├── trendingmovies.jsx # Trending movies section
-│   │       ├── trendingSeries.jsx # Trending series section
-│   │       ├── trendingPeople.jsx # Trending people section
-│   │       ├── moviesSection.jsx  # Movies catalog section
-│   │       ├── seriesSection.jsx  # Series catalog section
+│   │   │       ├── series.jsx
+│   │   │       └── epsoides.jsx
+│   │   └── landingPage/           # Home/landing experience
+│   │       ├── landingPage.jsx
+│   │       ├── header.jsx
+│   │       ├── footer.jsx
+│   │       ├── themeToggle.jsx
+│   │       ├── trending.jsx
+│   │       ├── trendingmovies.jsx
+│   │       ├── trendingSeries.jsx
+│   │       ├── trendingPeople.jsx
+│   │       ├── moviesSection.jsx
+│   │       ├── seriesSection.jsx
 │   │       └── search/
-│   │           ├── search.jsx     # Search results page
-│   │           ├── searchBar.jsx  # Search input component
-│   │           ├── result.jsx     # Search result card
-│   │           └── pagination.jsx # Pagination component
+│   │           ├── search.jsx
+│   │           ├── searchBar.jsx
+│   │           ├── result.jsx
+│   │           └── pagination.jsx
 │   ├── hooks/
-│   │   └── useTrending.js         # Custom hook for trending data
+│   │   └── useTrending.js
 │   ├── service/
 │   │   ├── apis/
-│   │   │   └── landingApi.js      # Axios API client configuration
-│   │   └── landingPage.js         # API service functions
+│   │   │   └── landingApi.js
+│   │   └── landingPage.js
 │   ├── stores/
-│   │   ├── authStore.js           # Authentication state store
-│   │   └── currentDetailStore.js  # Current detail view store
-│   ├── App.jsx                    # Main app component with routes
-│   └── main.jsx                   # Application entry point
+│   │   ├── authStore.js
+│   │   └── currentDetailStore.js
+│   ├── App.jsx
+│   └── main.jsx
 ├── package.json
 ├── tailwind.config.js
 └── vite.config.js
 ```
 
-## 🎨 Design Features
+### 🚦 Getting started
 
-- **Modern UI**: Clean, minimalist design with focus on content
-- **Responsive Layout**: Works seamlessly on mobile, tablet, and desktop
-- **Smooth Animations**: Transitions and hover effects throughout
-- **Accessibility**: Semantic HTML and ARIA labels
-- **Custom Scrollbars**: Hidden scrollbars for cleaner look
-- **Gradient Overlays**: Beautiful gradient effects on hero sections
+#### Prerequisites
 
-## 🚦 Getting Started
+- Node.js (v16 or higher).
+- `npm` or `yarn`.
+- A TMDB account and API key.
 
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
+#### Install and run locally
 
 ```bash
-git clone <repository-url>
+git clone <your-repository-url>
 cd movie-database
-```
-
-2. Install dependencies:
-
-```bash
 npm install
 ```
 
-3. Set up API Key:
-   - Get your TMDB API key from [themoviedb.org](https://www.themoviedb.org/settings/api)
-   - Update the API key in `src/service/apis/landingApi.js`
+Set your **TMDB API key** in `src/service/apis/landingApi.js` (or your environment setup, if you change it to use env variables).
 
-4. Start the development server:
+Then start the dev server:
 
 ```bash
 npm run dev
 ```
 
-5. Open your browser and navigate to `http://localhost:5173`
+By default Vite runs on `http://localhost:5173`.
 
-### Build for Production
+#### Production build
 
 ```bash
 npm run build
+npm run preview   # optional, to preview the built app
 ```
 
-### Preview Production Build
+### 🎯 Project status
 
-```bash
-npm run preview
-```
+**Completed / implemented**
 
-## 📝 Available Scripts
+- Landing page layout (hero, trending sections, catalogs).
+- Dark mode theming and toggle.
+- Detail layouts for movies and series (including recommendations and production companies).
+- Trending API integration and data fetching via React Query.
+- Global state stores with Zustand.
+- Core responsive design and navigation.
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+**Planned / in progress**
 
-## 🔄 Routes
+- Full API wiring for all detail views (series, episodes, people).
+- Search wired to live TMDB search endpoints with filters and sorting.
+- Authentication layer and real favorites/watchlist persistence.
+- Improved loading skeletons and dedicated error UI in all routes.
+- Pagination connected to API responses.
+- Performance/image optimizations and basic testing.
 
-- `/` - Landing page with trending content
-- `/movies` - Movies catalog page
-- `/series` - TV series catalog page
-- `/detail/:id` - Movie/Series detail page
-- `/search` - Search results page
+### 📌 Notes
 
-## 🎯 Current Progress
-
-### ✅ Completed
-
-- [x] Project setup with Vite and React
-- [x] TailwindCSS configuration with dark mode
-- [x] Landing page with all sections
-- [x] Dark mode toggle functionality
-- [x] Search page UI and components
-- [x] Movie detail page layout
-- [x] Series detail page with episodes
-- [x] API integration setup
-- [x] State management with Zustand
-- [x] React Query integration
-- [x] Custom hooks for data fetching
-- [x] Responsive design implementation
-- [x] Navigation and routing
-
-### 🚧 In Progress / TODO
-
-- [ ] Complete API integration for all pages
-- [ ] Implement search functionality with real API calls
-- [ ] Add user authentication
-- [ ] Implement favorites and watchlist functionality
-- [ ] Add loading states and error handling UI
-- [ ] Implement pagination with API
-- [ ] Add filtering and sorting functionality
-- [ ] Optimize images and performance
-- [ ] Add unit tests
-- [ ] Add E2E tests
-- [ ] Deploy to production
-
-## 📚 API Integration Status
-
-### ✅ Integrated
-
-- Trending content (all/day)
-- Trending movies (day)
-
-### 🚧 To Be Integrated
-
-- Movie details
-- Series details
-- Episode information
-- Search functionality
-- People/actors information
-- Recommendations
-- Production companies
-
-## 🤝 Contributing
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- This project is a **learning and portfolio** capstone, focused on clean UI, modern React patterns, and API‑driven design.
+- You are free to fork and extend it (for example, by adding authentication, recommendations, or your own rating system).
