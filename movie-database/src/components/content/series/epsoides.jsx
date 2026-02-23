@@ -77,15 +77,20 @@ export const EpisodeCard = ({ ep }) => (
                   className={
                     "w-4 h-4 fill-yellow-600 text-yellow-600 dark:fill-yellow-400 dark:text-yellow-400"
                   }
+                  key={star}
                 />
               ) : star - ep.vote_average < 1 && star - ep.vote_average > 0 ? (
                 <StarHalf
                   className={
                     "w-4 h-4 fill-yellow-600 text-yellow-600 dark:fill-yellow-400 dark:text-yellow-400"
                   }
+                  key={star}
                 />
               ) : (
-                <Star className={"w-4 h-4 text-gray-300 dark:text-gray-600"} />
+                <Star
+                  className={"w-4 h-4 text-gray-300 dark:text-gray-600"}
+                  key={star}
+                />
               ),
             )}
           </div>
