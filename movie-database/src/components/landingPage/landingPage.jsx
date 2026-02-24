@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import Header from "./header";
 import TrendingMovies from "./trendingmovies";
 import TrendingSeries from "./trendingSeries";
 import TrendingPeople from "./trendingPeople";
