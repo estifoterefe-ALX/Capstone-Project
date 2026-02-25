@@ -49,7 +49,6 @@ export default function Detail({
   if (error) {
     return <Error />;
   }
-  console.log(credits);
   return (
     <div className="bg-white dark:bg-[#0b0d14] min-h-screen text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       {/* TopBar - Now outside hero section */}
