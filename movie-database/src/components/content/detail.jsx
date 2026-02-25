@@ -294,7 +294,7 @@ export default function Detail({
           </div>
         </div>
         <div
-          className="flex overflow-x-auto gap-4 pb-8 scrollbar-hide"
+          className="flex overflow-x-auto gap-4 pb-8 no-scrollbar"
           ref={scrollRef}
         >
           {recommendation?.list?.results.length !== 0 ? (
@@ -311,12 +311,6 @@ export default function Detail({
           )}
         </div>
       </div>
-
-      {/* Hide scrollbar style */}
-      <style>{`
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  `}</style>
     </div>
   );
 }
