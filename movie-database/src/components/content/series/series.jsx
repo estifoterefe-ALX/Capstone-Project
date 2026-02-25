@@ -25,6 +25,7 @@ function SeriesDetail() {
   if (seriesDetailError) {
     return <Error message="Series Detail Not Found" />;
   }
+  console.log(seriesDetailData);
   return (
     <div className="min-h-screen bg-white dark:bg-[#110f08] text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
       {/* Top Header */}
@@ -73,7 +74,9 @@ function SeriesDetail() {
                 </span>
                 <div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 text-xs sm:text-sm font-bold">
                   <Star size={12} sm:size={14} fill="currentColor" />
-                  <span>{seriesDetailData?.vote_average} Rating</span>
+                  <span>
+                    {RoundToOneDecimal(seriesDetailData?.vote_average)} Rating
+                  </span>
                 </div>
               </div>
 
@@ -179,7 +182,9 @@ function SeriesDetail() {
                   Avg.Duration
                 </h4>
                 <div className="text-gray-900 dark:text-white text-xs font-bold">
-                  {seriesDetailData?.episode_run_time[0]}min/per epsoide
+                  {seriesDetailData?.episode_run_time.length !== 0
+                    ? seriesDetailData?.episode_run_time[0] + "min/per epsoide"
+                    : "-"}
                 </div>
               </div>
               <div>
