@@ -49,20 +49,19 @@ export default function Detail({
   if (error) {
     return <Error />;
   }
+  console.log(credits);
   return (
     <div className="bg-white dark:bg-[#0b0d14] min-h-screen text-gray-900 dark:text-white font-sans selection:bg-yellow-500 selection:text-black transition-colors duration-200">
-      <TopBar />
+      {/* TopBar - Now outside hero section */}
+      <div className="relative z-50">
+        <TopBar />
+      </div>
 
       {/* Hero Section */}
-      <div className="relative w-full h-screen md:h-[85vh]">
+      {/* Hero Section - Now with proper spacing from top */}
+      <div className="relative w-full min-h-[85vh] md:h-[85vh]">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          {/* <img
-            src={`https://image.tmdb.org/t/p/original/${items?.backdrop_path}`}
-            alt="Background"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          /> */}
           <picture>
             <source
               media="(min-width: 768px)"
@@ -71,6 +70,7 @@ export default function Detail({
             <img
               src={`https://image.tmdb.org/t/p/original/${items?.poster_path}`}
               className="w-full h-full object-cover"
+              alt={items?.title || items?.name || "Background"}
             />
           </picture>
           {/* Complex Gradient to fade into body color */}
@@ -78,56 +78,61 @@ export default function Detail({
           <div className="absolute inset-0 bg-linear-to-r from-white/20 via-transparent to-transparent dark:from-[#0b0d14]/90 dark:via-[#0b0d14]/40 dark:to-transparent" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex flex-col justify-end px-8 md:px-16 pb-16 max-w-4xl">
+        {/* Hero Content - Added pt-20 to account for TopBar height */}
+        <div className="relative z-10 h-full min-h-[85vh] flex flex-col justify-end px-8 md:px-16 pb-16 max-w-4xl pt-20 md:pt-24">
           <div className="flex items-center gap-3 mb-4">
             <span className="bg-yellow-500 dark:bg-yellow-400 text-black text-[10px] font-black px-2 py-1 rounded uppercase tracking-wider">
               Featured
             </span>
-            <span className="text-yellow-500 dark:text-yellow-400 text-xs font-bold tracking-widest uppercase">
-              {items?.tagline}
+            <span className="text-yellow-500 dark:text-yellow-400 text-xs font-bold tracking-widest uppercase line-clamp-1">
+              {items?.tagline || "A TALL TALE THAT BECAME A SUDDEN END."}
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-6xl font-black italic tracking-tighter text-gray-900 dark:text-white mb-4 uppercase">
-            {items?.title || items?.name}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black italic tracking-tighter text-gray-900 dark:text-white mb-4 uppercase break-words">
+            {items?.title || items?.name || "A KNIGHT OF THE SEVEN KINGDOMS"}
           </h1>
 
-          <div className="flex items-center gap-6 text-sm font-medium text-gray-900 dark:text-gray-300 mb-6">
-            <span className="text-gray-900 dark:text-gray-300">
+          <div className="flex items-center gap-4 md:gap-6 text-sm font-medium text-gray-900 dark:text-gray-300 mb-6 flex-wrap">
+            <span className="text-gray-900 dark:text-gray-300 whitespace-nowrap">
               {items?.release_date
                 ? YearDisplay(items?.release_date)
-                : YearDisplay(items?.first_air_date)}
+                : YearDisplay(items?.first_air_date) || "2026"}
             </span>
-            <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full" />
-            <span className="border border-gray-400 dark:border-gray-900 px-1 rounded text-xs">
-              {RoundToOneDecimal(items?.popularity)}
+            <span className="w-1 h-1 bg-yellow-500 dark:bg-yellow-400 rounded-full flex-shrink-0" />
+            <span className="border border-gray-400 dark:border-gray-900 px-1.5 py-0.5 rounded text-xs whitespace-nowrap">
+              {RoundToOneDecimal(items?.popularity) || "382.6"}
             </span>
-            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
-            <span>
-              {items?.runtime ? items?.runtime : items?.number_of_seasons}
+            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full flex-shrink-0" />
+            <span className="whitespace-nowrap">
+              {items?.runtime
+                ? `${items?.runtime} min`
+                : items?.number_of_seasons
+                  ? `${items?.number_of_seasons} seasons`
+                  : "1"}
             </span>
-            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full" />
-            <div className="flex items-center gap-1 text-yellow-900 dark:text-yellow-400">
-              <Star size={14} fill="currentColor" />
-              <span>{items?.vote_average?.toFixed(1)}</span>
+            <span className="w-1 h-1 bg-yellow-900 dark:bg-yellow-400 rounded-full flex-shrink-0" />
+            <div className="flex items-center gap-1 text-yellow-900 dark:text-yellow-400 whitespace-nowrap">
+              <Star size={16} fill="currentColor" />
+              <span>{items?.vote_average?.toFixed(1) || "8.5"}</span>
             </div>
           </div>
 
-          <p className="text-gray-900 dark:text-gray-400 text-lg leading-relaxed max-w-2xl mb-10 relative pl-4">
+          <p className="text-gray-900 dark:text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mb-10 relative pl-4 line-clamp-3 md:line-clamp-4">
             <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-yellow-500/50 dark:bg-yellow-400/50"></span>
-            {items?.overview}
+            {items?.overview ||
+              "A century before the events of Game of Thrones, two unlikely heroes wandered Westeros: a young, naive knight..."}
           </p>
 
-          <div className="flex flex-wrap gap-4">
-            <button className="bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-400 dark:hover:bg-yellow-300 text-black px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer">
+          <div className="flex flex-wrap gap-3 md:gap-4">
+            <button className="bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-400 dark:hover:bg-yellow-300 text-black px-6 md:px-8 py-3 md:py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer">
               <Heart size={16} fill="black" /> Add to Favorite
             </button>
-            <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
+            <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
               <Bookmark size={16} /> Add to Watchlist
             </button>
             <Link to={type === "movie" ? `/movies/${id}` : `/series/${id}`}>
-              <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-8 py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
+              <button className="bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 backdrop-blur-sm text-gray-800 dark:text-white px-6 md:px-8 py-3 md:py-4 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-2 border border-gray-300 dark:border-white/10 transition-colors cursor-pointer">
                 <Info size={16} /> View Detail
               </button>
             </Link>
@@ -250,8 +255,9 @@ export default function Detail({
                   Directed By
                 </p>
                 <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">
-                  {credits?.crew?.find((person) => person.job === "Director")
-                    ?.name ||
+                  {credits?.crew?.find(
+                    (person) => person.known_for_department === "Directing",
+                  )?.name ||
                     credits?.crew?.find(
                       (person) => person.known_for_department === "Writing",
                     )?.name}
