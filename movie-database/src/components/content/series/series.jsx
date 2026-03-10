@@ -75,7 +75,8 @@ function SeriesDetail() {
                 <div className="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 text-xs sm:text-sm font-bold">
                   <Star size={12} sm:size={14} fill="currentColor" />
                   <span>
-                    {RoundToOneDecimal(seriesDetailData?.vote_average)} Rating
+                    
+                    
                   </span>
                 </div>
               </div>
