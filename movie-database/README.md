@@ -159,7 +159,13 @@ cd movie-database
 npm install
 ```
 
-Set your **TMDB API key** in `src/service/apis/landingApi.js` (or your environment setup, if you change it to use env variables).
+Create a `.env` file in the project root and add your **TMDB API key**:
+
+```bash
+VITE_TMDB_API_KEY=your_tmdb_v3_api_key_here
+```
+
+You can copy the format from `.env.example`.
 
 Then start the dev server:
 

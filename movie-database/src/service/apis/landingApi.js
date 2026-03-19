@@ -1,19 +1,28 @@
 import axios from "axios";
 
+const tmdbApiKey = import.meta.env.VITE_TMDB_API_KEY;
+
 const landingApi = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   headers: {
     accept: "application/json",
   },
   params: {
-    api_key: "1015980f64c8eb4222da7157e27d3288", // <-- replace this with your TMDb v3 API key
+    api_key: tmdbApiKey,
   },
 });
 
 // Request interceptor
 landingApi.interceptors.request.use(
   (config) => {
-    // You could add auth tokens here if needed
+    if (!tmdbApiKey) {
+      return Promise.reject(
+        new Error(
+          "Missing TMDB API key. Add VITE_TMDB_API_KEY to your .env file.",
+        ),
+      );
+    }
+
     return config;
   },
   (error) => {
